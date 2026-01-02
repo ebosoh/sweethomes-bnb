@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- SEO Meta Tags -->
+  <title>sweethomes-bnb - Premium Accommodation Booking | Comfort & Convenience</title>
+  <meta name="description"
+    content="Book your premium stay at sweethomes-bnb. Modern, comfortable accommodation with free WiFi, parking, 24/7 security, and Netflix. 1, 2, and 3 bedroom options available.">
+  <meta name="keywords"
+    content="accommodation booking, premium stays, vacation rental, Kenya accommodation, sweethomes-bnb">
+  <meta name="author" content="sweethomes-bnb">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="sweethomes-bnb - Premium Accommodation Booking">
+  <meta property="og:description"
+    content="Book your premium stay with comfort and convenience. Modern amenities, secure location, and excellent service.">
+  <meta property="og:url" content="https://yourusername.github.io/sweethomes-bnb">
+  <meta property="og:image" content="https://yourusername.github.io/sweethomes-bnb/og-image.jpg">
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="sweethomes-bnb - Premium Accommodation Booking">
+  <meta name="twitter:description" content="Book your premium stay with comfort and convenience.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-section">
+    <div class="container">
+      <div class="hero-content">
+        <div class="logo-container">
+          <img src="seethomes-logo.jpg" alt="sweethomes-bnb Logo" class="hero-logo animate-swing" id="heroLogo">
+        </div>
+        <h1 class="hero-title animate-fade-in">Welcome to sweethomes-bnb</h1>
+        <p class="hero-subtitle animate-fade-in">Premium Stays. Comfort. Convenience.</p>
+        <a href="#booking" class="btn btn-primary btn-lg animate-fade-in">Book Your Stay</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Property Carousel -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <h2 class="section-title">Explore Our Property</h2>
+      <div class="carousel-container">
+        <div class="carousel" id="propertyCarousel">
+          <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide">
+              <img src="property-1.jpg" alt="Property View 1" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-2.jpg" alt="Property View 2" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-3.jpg" alt="Property View 3" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-4.jpg" alt="Property View 4" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-5.jpg" alt="Property View 5" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-6.jpg" alt="Property View 6" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-7.jpg" alt="Property View 7" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-8.jpg" alt="Property View 8" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-9.jpg" alt="Property View 9" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-10.jpg" alt="Property View 10" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-11.jpg" alt="Property View 11" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-12.jpg" alt="Property View 12" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-13.jpg" alt="Property View 13" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-14.jpg" alt="Property View 14" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-15.jpg" alt="Property View 15" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-16.jpg" alt="Property View 16" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-17.jpg" alt="Property View 17" class="carousel-image">
+            </div>
+            <div class="carousel-slide">
+              <img src="property-18.jpg" alt="Property View 18" class="carousel-image">
+            </div>
+          </div>
+          <button class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Previous slide">
+            <span>‹</span>
+          </button>
+          <button class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Next slide">
+            <span>›</span>
+          </button>
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Room Types & Pricing -->
+  <section id="rooms" class="section bg-white">
+    <div class="container">
+      <h2 class="section-title">Room Types & Pricing</h2>
+      <p class="text-center text-secondary mb-xl">Choose the perfect accommodation for your stay</p>
+
+      <div class="grid grid-3 room-cards">
+        <!-- 1 Bedroom -->
+        <article class="card room-card">
+          <div class="room-header">
+            <h3 class="card-title">1 Bedroom</h3>
+            <span class="badge badge-accent">Max 2 Guests</span>
+          </div>
+          <div class="room-price">
+            <span class="price-amount">KES 3,000</span>
+            <span class="price-period">/ night</span>
+          </div>
+          <p class="card-text">Perfect for couples or solo travelers seeking comfort and privacy.</p>
+          <ul class="room-features">
+            <li>Queen-size bed</li>
+            <li>Private bathroom</li>
+            <li>Work desk</li>
+            <li>All amenities included</li>
+          </ul>
+          <a href="#booking" class="btn btn-outline btn-block">Book Now</a>
+        </article>
+
+        <!-- 2 Bedroom -->
+        <article class="card room-card featured">
+          <div class="featured-badge">Most Popular</div>
+          <div class="room-header">
+            <h3 class="card-title">2 Bedroom</h3>
+            <span class="badge badge-accent">Max 4 Guests</span>
+          </div>
+          <div class="room-price">
+            <span class="price-amount">KES 5,000</span>
+            <span class="price-period">/ night</span>
+          </div>
+          <p class="card-text">Ideal for small families or groups seeking spacious accommodation.</p>
+          <ul class="room-features">
+            <li>2 comfortable bedrooms</li>
+            <li>Shared living space</li>
+            <li>Full kitchen access</li>
+            <li>All amenities included</li>
+          </ul>
+          <a href="#booking" class="btn btn-primary btn-block">Book Now</a>
+        </article>
+
+        <!-- 3 Bedroom -->
+        <article class="card room-card">
+          <div class="room-header">
+            <h3 class="card-title">3 Bedroom</h3>
+            <span class="badge badge-accent">Max 6 Guests</span>
+          </div>
+          <div class="room-price">
+            <span class="price-amount">KES 8,000</span>
+            <span class="price-period">/ night</span>
+          </div>
+          <p class="card-text">Perfect for larger families or groups wanting maximum space and comfort.</p>
+          <ul class="room-features">
+            <li>3 spacious bedrooms</li>
+            <li>Large living area</li>
+            <li>Full kitchen & dining</li>
+            <li>All amenities included</li>
+          </ul>
+          <a href="#booking" class="btn btn-outline btn-block">Book Now</a>
+        </article>
+      </div>
+
+      <div class="payment-notice">
+        <p><strong>Payment Terms:</strong> 50% payable on booking, balance on arrival. M-Pesa only.</p>
+        <p class="text-sm">Guests exceeding allowed capacity will incur extra charges.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Amenities -->
+  <section id="amenities" class="section">
+    <div class="container">
+      <h2 class="section-title">Premium Amenities</h2>
+      <p class="text-center text-secondary mb-xl">Everything you need for a comfortable stay</p>
+
+      <div class="grid grid-4 amenities-grid">
+        <div class="amenity-item animate-fade-in">
+          <div class="amenity-icon">🚿</div>
+          <h4 class="amenity-title">Hot Shower</h4>
+        </div>
+        <div class="amenity-item animate-fade-in">
+          <div class="amenity-icon">🍳</div>
+          <h4 class="amenity-title">Equipped Kitchen</h4>
+        </div>
+        <div class="amenity-item animate-fade-in">
+          <div class="amenity-icon">📶</div>
+          <h4 class="amenity-title">Free WiFi</h4>
+        </div>
+        <div class="amenity-item animate-fade-in">
+          <div class="amenity-icon">🚗</div>
+          <h4 class="amenity-title">Free Parking</h4>
+        </div>
+        <div class="amenity-item animate-fade-in">
+          <div class="amenity-icon">🛡️</div>
+          <h4 class="amenity-title">24/7 Security</h4>
+        </div>
+        <div class="amenity-item animate-fade-in">
+          <div class="amenity-icon">🏘️</div>
+          <h4 class="amenity-title">Gated Community</h4>
+        </div>
+        <div class="amenity-item animate-fade-in">
+          <div class="amenity-icon">📍</div>
+          <h4 class="amenity-title">Near Town</h4>
+        </div>
+        <div class="amenity-item animate-fade-in">
+          <div class="amenity-icon">📺</div>
+          <h4 class="amenity-title">43" Smart TV + Netflix</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <section id="booking" class="section bg-white">
+    <div class="container">
+      <h2 class="section-title">Book Your Stay</h2>
+      <p class="text-center text-secondary mb-xl">Fill in your details to reserve your accommodation</p>
+
+      <div class="booking-container">
+        <form id="bookingForm" class="booking-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fullName" class="form-label">Full Name *</label>
+              <input type="text" id="fullName" name="fullName" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="nationality" class="form-label">Nationality *</label>
+              <input type="text" id="nationality" name="nationality" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phoneNumber" class="form-label">Phone Number *</label>
+              <input type="tel" id="phoneNumber" name="phoneNumber" class="form-input" placeholder="+254..." required>
+            </div>
+            <div class="form-group">
+              <label for="idPassport" class="form-label">ID / Passport Number *</label>
+              <input type="text" id="idPassport" name="idPassport" class="form-input" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="carPlate" class="form-label">Car Number Plate</label>
+              <input type="text" id="carPlate" name="carPlate" class="form-input" placeholder="Optional">
+            </div>
+            <div class="form-group">
+              <label for="roomType" class="form-label">Room Type *</label>
+              <select id="roomType" name="roomType" class="form-select" required>
+                <option value="" data-price="0">Select Room Type</option>
+                <option value="1-bedroom" data-price="3000">1 Bedroom (Max 2 Guests) - KES 3,000/night</option>
+                <option value="2-bedroom" data-price="5000">2 Bedroom (Max 4 Guests) - KES 5,000/night</option>
+                <option value="3-bedroom" data-price="8000">3 Bedroom (Max 6 Guests) - KES 8,000/night</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row total-price-row">
+            <div class="form-group total-price-group">
+              <label class="form-label">Total Price ESTIMATE</label>
+              <div id="totalPriceDisplay" class="total-price-display">KES 0</div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="arrivalDate" class="form-label">Arrival Date *</label>
+                <input type="date" id="arrivalDate" name="arrivalDate" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="arrivalTime" class="form-label">Arrival Time *</label>
+                <input type="time" id="arrivalTime" name="arrivalTime" class="form-input" required>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="departureDate" class="form-label">Departure Date *</label>
+                <input type="date" id="departureDate" name="departureDate" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label for="departureTime" class="form-label">Departure Time *</label>
+                <input type="time" id="departureTime" name="departureTime" class="form-input" required>
+              </div>
+            </div>
+
+            <div class="booking-instructions">
+              <h4>Important Booking Information</h4>
+              <ul>
+                <li>50% payment required on booking</li>
+                <li>Balance payable on arrival</li>
+                <li>Payments via M-Pesa only</li>
+                <li>Prices shown are per night</li>
+                <li>Guests exceeding allowed capacity will incur extra charges</li>
+                <li>For refund, cancellation 1 day before arrival</li>
+              </ul>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitBooking">
+                Confirm Booking
+              </button>
+            </div>
+        </form>
+
+        <div id="bookingSuccess" class="booking-success hidden">
+          <div class="success-icon">✓</div>
+          <h3>Booking Confirmed!</h3>
+          <p>Thank you for your booking. You will receive a confirmation email shortly.</p>
+          <button class="btn btn-secondary" onclick="resetBookingForm()">Make Another Booking</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sticky Book Now Button (Mobile) -->
+  <div class="sticky-cta">
+    <a href="#booking" class="btn btn-primary btn-block">Book Now</a>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>sweethomes-bnb</h3>
+          <p>Premium accommodation with comfort and convenience.</p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Phone: <a href="tel:+254780898927">+254 780 898 927</a></p>
+          <p>Phone: <a href="tel:0780898927">0780 898 927</a></p>
+        </div>
+
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#rooms">Room Types</a></li>
+            <li><a href="#amenities">Amenities</a></li>
+            <li><a href="#booking">Book Now</a></li>
+            <li><a href="rules.html">Stay Rules</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h4>Follow Us</h4>
+          <div class="social-icons" id="socialIcons">
+            <!-- Social icons will be added via JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 sweethomes-bnb. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Float Button -->
+  <a href="https://wa.me/254780898927" class="whatsapp-float" target="_blank" rel="noopener"
+    aria-label="Chat on WhatsApp">
+    <span class="whatsapp-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor"
+        color="#ffffff">
+        <path
+          d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.696c1.029.575 1.936.88 2.806.88 3.183 0 5.769-2.586 5.769-5.766.001-3.182-2.585-5.764-5.769-5.764zm.92 8.169c-.318.159-.159.27-.478.431-.482.253-1.077.307-2.149-.12-1.07-.426-1.956-1.371-2.486-2.096-.134.19-.661.85-.062 1.487.675.675 1.579 1.517 3.394 1.517.962 0 1.639-.345 2.155-.835.48-.456.634-1.229.479-1.936-.089.412-.478.697-.733.824-.12.06-.521.26-.12.728zm2.469-8.791C13.805 4.364 11.969 4 10.134 4 6.75 4 4.002 6.748 4 10.131c0 1.082.28 2.106.772 3.012L4 16.5l3.473-.912c.96.485 2.046.75 3.197.75 4.908 0 8.893-3.991 8.893-8.895 0-2.457-.954-4.767-2.695-6.508-1.741-1.742-4.053-2.693-6.51-2.693-5.068 0-9.192 4.124-9.192 9.192 0 1.977.635 3.821 1.705 5.341L3 19l4.167-1.107c1.472.935 3.204 1.488 5.068 1.488 5.068 0 9.192-4.124 9.192-9.192-.001-5.069-4.127-9.193-9.195-9.193z" />
+      </svg>
+    </span>
+  </a>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+
+</html>

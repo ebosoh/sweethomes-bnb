@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- SEO Meta Tags -->
+    <title>House Rules & Policies | sweethomes-bnb</title>
+    <meta name="description"
+        content="Read our house rules and booking policies to ensure a comfortable stay at sweethomes-bnb.">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero-section hero-small">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title animate-fade-in">House Rules & Policies</h1>
+                <p class="hero-subtitle animate-fade-in">Please review to ensure a pleasant stay for everyone.</p>
+                <a href="index.html" class="btn btn-outline btn-lg animate-fade-in"
+                    style="margin-top: 1rem; color: white; border-color: white;">Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rules Grid -->
+    <section class="section">
+        <div class="container">
+            <div class="grid grid-3">
+
+                <!-- Rule 1 -->
+                <article class="card rule-card animate-fade-in">
+                    <div class="rule-icon">🕒</div>
+                    <h3 class="card-title">Check-in & Out</h3>
+                    <ul class="rule-list">
+                        <li><strong>Check-in:</strong> 12:00 PM onwards</li>
+                        <li><strong>Check-out:</strong> By 10:00 AM</li>
+                        <li>Valid ID/Passport required for all adult guests upon arrival.</li>
+                    </ul>
+                </article>
+
+                <!-- Rule 2 -->
+                <article class="card rule-card animate-fade-in">
+                    <div class="rule-icon">🏠</div>
+                    <h3 class="card-title">House Rules</h3>
+                    <ul class="rule-list">
+                        <li><strong>No Smoking</strong> inside the house. Balconies or designated areas only.</li>
+                        <li>No parties or loud events.</li>
+                        <li>Strictly no unregistered guests overnight.</li>
+                    </ul>
+                </article>
+
+                <!-- Rule 3 -->
+                <article class="card rule-card animate-fade-in">
+                    <div class="rule-icon">💳</div>
+                    <h3 class="card-title">Payment</h3>
+                    <ul class="rule-list">
+                        <li><strong>50% Deposit</strong> required to confirm booking.</li>
+                        <li>Balance payable immediately upon arrival.</li>
+                        <li><strong>M-Pesa Only</strong> for security and tracking.</li>
+                    </ul>
+                </article>
+
+                <!-- Rule 4 -->
+                <article class="card rule-card animate-fade-in">
+                    <div class="rule-icon">📅</div>
+                    <h3 class="card-title">Cancellation</h3>
+                    <ul class="rule-list">
+                        <li>Free cancellation up to <strong>24 hours</strong> before check-in.</li>
+                        <li>Cancellations within 24 hours of arrival are non-refundable.</li>
+                        <li>Early departures are non-refundable.</li>
+                    </ul>
+                </article>
+
+                <!-- Rule 5 -->
+                <article class="card rule-card animate-fade-in">
+                    <div class="rule-icon">🛡️</div>
+                    <h3 class="card-title">Safety & Security</h3>
+                    <ul class="rule-list">
+                        <li>24/7 Gate Security is provided.</li>
+                        <li>Please keep the gate remote/keys safe. Replacement fee applies for lost keys.</li>
+                        <li>Ensure main door is locked when leaving.</li>
+                    </ul>
+                </article>
+
+                <!-- Rule 6 -->
+                <article class="card rule-card animate-fade-in">
+                    <div class="rule-icon">💡</div>
+                    <h3 class="card-title">Amenities</h3>
+                    <ul class="rule-list">
+                        <li>Turn off lights and heater when leaving for the day.</li>
+                        <li>Wi-Fi is free for fair usage.</li>
+                        <li>Please report any damages immediately.</li>
+                    </ul>
+                </article>
+
+            </div>
+
+            <!-- Bottom Actions -->
+            <div class="text-center mt-xl animate-fade-in">
+                <p class="mb-md">Ready to book your stay?</p>
+                <a href="index.html#booking" class="btn btn-primary btn-lg">Book Now</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>sweethomes-bnb</h3>
+                    <p>Premium accommodation with comfort and convenience.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Phone: <a href="tel:+254780898927">+254 780 898 927</a></p>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Display Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#rooms">Room Types</a></li>
+                        <li><a href="index.html#booking">Book Now</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 sweethomes-bnb. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.animate-fade-in').forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                item.style.animation = 'none'; // Override CSS animation for stricter JS control if needed
+                observer.observe(item);
+            });
+        });
+    </script>
+
+</body>
+
+</html>
