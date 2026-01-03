@@ -471,3 +471,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log('sweethomes-bnb initialized successfully!');
 });
+
+
+/* ============================================
+   PROMO BANNER LOGIC
+   ============================================ */
+function initPromoBanner() {
+    const promoText = document.getElementById('promoText');
+    if (!promoText) return;
+
+    const promos = [
+        'Get 10% Discount for any stays more than 5 nights (weekly rate)',
+        'Get 20% Discount for stays more than a month (monthly rate)'
+    ];
+
+    let currentIndex = 0;
+
+    setInterval(() => {
+        // Fade out
+        promoText.style.opacity = '0';
+
+        setTimeout(() => {
+            // Change text
+            currentIndex = (currentIndex + 1) % promos.length;
+            promoText.innerText = promos[currentIndex];
+
+            // Fade in
+            promoText.style.opacity = '1';
+        }, 500); // Wait for fade out to complete
+    }, 5000); // Switch every 5 seconds
+}
+
+// Add to initialization
+document.addEventListener('DOMContentLoaded', () => {
+    initPromoBanner();
+});

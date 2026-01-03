@@ -739,15 +739,80 @@ a:hover {
 
 @media (min-width: 768px) {
     .carousel {
-        height: 350px;
-        /* Tablet height */
+        height: 525px;
+        /* Tablet height increased */
     }
 }
 
 @media (min-width: 1024px) {
+    .carousel-container {
+        max-width: 1300px;
+        /* Wider for desktop */
+    }
+
     .carousel {
-        height: 400px;
-        /* Desktop height */
+        height: 600px;
+        /* Desktop height increased by 50% */
+    }
+}
+
+/* ============================================
+   SCROLL INDICATORS
+   ============================================ */
+.scroll-indicator {
+    position: absolute;
+    bottom: 20%;
+    z-index: 10;
+    color: #d1a53e;
+    /* Gold */
+    font-family: var(--font-family-heading);
+    font-weight: 600;
+    font-size: var(--font-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    opacity: 0.8;
+    animation: float-bounce 2s ease-in-out infinite;
+    cursor: pointer;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.scroll-indicator::after {
+    content: '↓';
+    font-size: var(--font-xl);
+    margin-top: var(--space-xs);
+    transform: rotate(0deg);
+    /* Arrow points down relative to text */
+}
+
+.scroll-indicator.left {
+    left: var(--space-md);
+}
+
+.scroll-indicator.right {
+    right: var(--space-md);
+}
+
+@keyframes float-bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+}
+
+/* Hide on mobile to save space */
+@media (max-width: 1023px) {
+    .scroll-indicator {
+        display: none;
     }
 }
 
@@ -1472,4 +1537,47 @@ a:hover {
         font-size: var(--font-sm);
         padding: var(--space-xs) var(--space-sm);
     }
+}
+
+/* Updated Scroll Indicator Positioning */
+.carousel-container {
+    position: relative; /* Anchor for absolute indicators */
+}
+
+.scroll-indicator {
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: none; /* Reset simpler animation */
+}
+
+.scroll-indicator.left {
+    left: -60px; /* Push outside carousel */
+}
+
+.scroll-indicator.right {
+    right: -60px; /* Push outside carousel */
+}
+
+.scroll-indicator::after {
+    transform: rotate(0deg); /* Text is vertical-rl, arrow char 2193  usually points down. If sideways, we rotate 90deg */
+    /* If browser rotates  90deg to point right, we need -90deg to point down. Let's try explicit. */
+    writing-mode: horizontal-tb; /* Reset arrow to horizontal flow so rotation is predictable */
+    transform: rotate(0deg); /* Down is 0deg for standard block flow */
+}
+
+/* New bounce animation for side indicators */
+@keyframes side-bounce {
+    0%, 100% { transform: translateY(-50%); }
+    50% { transform: translateY(-40%); }
+}
+
+.scroll-indicator {
+    animation: side-bounce 2s ease-in-out infinite;
+}
+
+@media (max-width: 1350px) {
+    /* On smaller screens where outside indicators might clip, move them inside */
+    .scroll-indicator.left { left: 10px; z-index: 20; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+    .scroll-indicator.right { right: 10px; z-index: 20; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
 }
