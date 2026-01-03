@@ -210,13 +210,52 @@ class BookingForm {
             }
         });
 
-        // Form submission
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
 
         // Real-time price calculation events
         document.getElementById('roomType').addEventListener('change', () => this.calculateTotal());
         document.getElementById('arrivalDate').addEventListener('change', () => this.calculateTotal());
         document.getElementById('departureDate').addEventListener('change', () => this.calculateTotal());
+    }
+
+    handleSubmit(e) {
+        e.preventDefault(); // Prevent default form submission
+
+        if (!this.validateForm()) {
+            return; // Stop if validation fails
+        }
+
+        // Collect form data
+        // For international phone, combining code and number
+        const countryCode = document.getElementById('countryCode').value;
+        const rawMobile = document.getElementById('mobile').value;
+        const fullPhoneNumber = countryCode === 'other' ? rawMobile : `${countryCode} ${rawMobile}`;
+
+        const formData = {
+            fullName: document.getElementById('fullName').value,
+            nationality: document.getElementById('nationality').value,
+            phoneNumber: fullPhoneNumber,
+            address: document.getElementById('address').value,
+            idPassport: document.getElementById('idPassport').value,
+            carPlate: document.getElementById('carPlate').value,
+            roomType: document.getElementById('roomType').value,
+            arrivalDate: document.getElementById('arrivalDate').value,
+            arrivalTime: document.getElementById('arrivalTime').value,
+            departureDate: document.getElementById('departureDate').value,
+            departureTime: document.getElementById('departureTime').value,
+        };
+
+        console.log('Form Data Submitted:', formData);
+
+        // Here you would typically send the formData to a server
+        // For demonstration, we'll just show an alert
+        alert('Booking submitted successfully!\n' + JSON.stringify(formData, null, 2));
+
+        // Optionally, reset the form
+        this.form.reset();
+        document.getElementById('totalPriceDisplay').innerText = 'KES 0';
+        const priceRow = document.querySelector('.total-price-row');
+        if (priceRow) priceRow.style.display = 'none';
     }
 
     calculateTotal() {
@@ -255,160 +294,17 @@ class BookingForm {
             return false;
         }
 
-        // Phone validation (Kenyan format)
-        const phone = document.getElementById('phoneNumber').value;
-        const phoneRegex = /^(?:\+254|0)[17]\d{8}$/;
-        if (!phoneRegex.test(phone.replace(/\s/g, ''))) {
-            alert('Please enter a valid Kenyan phone number (e.g., 0712345678 or +254712345678).');
+        // Phone validation (International safe check)
+        const mobile = document.getElementById('mobile').value;
+        const address = document.getElementById('address').value;
+
+        if (!mobile || !address) {
+            alert('Please complete all fields (Phone and Address)');
             return false;
         }
 
         return true;
     }
-
-    async handleSubmit(e) {
-        e.preventDefault();
-
-        if (!this.validateForm()) {
-            return;
-        }
-
-        const submitButton = document.getElementById('submitBooking');
-        submitButton.disabled = true;
-        submitButton.textContent = 'Processing...';
-
-        // Collect form data
-        const formData = {
-            fullName: document.getElementById('fullName').value,
-            nationality: document.getElementById('nationality').value,
-            phoneNumber: document.getElementById('phoneNumber').value,
-            idPassport: document.getElementById('idPassport').value,
-            carPlate: document.getElementById('carPlate').value,
-            roomType: document.getElementById('roomType').value,
-            arrivalDate: document.getElementById('arrivalDate').value,
-            arrivalTime: document.getElementById('arrivalTime').value,
-            departureDate: document.getElementById('departureDate').value,
-            departureTime: document.getElementById('departureTime').value,
-        };
-
-        try {
-            // TODO: Replace with actual Google Apps Script URL
-            // const response = await fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
-            //   method: 'POST',
-            //   mode: 'cors',
-            //   headers: {
-            //     'Content-Type': 'application/json',
-            //   },
-            //   body: JSON.stringify(formData),
-            // });
-
-            // const result = await response.json();
-
-            // Simulate successful submission for now
-            await new Promise(resolve => setTimeout(resolve, 1500));
-
-            // Show success message
-            this.showSuccess();
-
-        } catch (error) {
-            console.error('Booking error:', error);
-            alert('There was an error processing your booking. Please try again or contact us directly.');
-            submitButton.disabled = false;
-            submitButton.textContent = 'Confirm Booking';
-        }
-    }
-
-    showSuccess() {
-        this.form.classList.add('hidden');
-        document.getElementById('bookingSuccess').classList.remove('hidden');
-
-        // Scroll to success message
-        document.getElementById('bookingSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-}
-
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
-
-// Reset booking form
-function resetBookingForm() {
-    const form = document.getElementById('bookingForm');
-    const successMessage = document.getElementById('bookingSuccess');
-
-    form.reset();
-    form.classList.remove('hidden');
-    successMessage.classList.add('hidden');
-
-    const submitButton = document.getElementById('submitBooking');
-    submitButton.disabled = false;
-    submitButton.textContent = 'Confirm Booking';
-
-    // Scroll to form
-    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-// Smooth scroll for anchor links
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-
-            // Skip if it's just "#"
-            if (href === '#') return;
-
-            e.preventDefault();
-
-            const target = document.querySelector(href);
-            if (target) {
-                const offset = 80; // Offset for sticky header if any
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-}
-
-// Add social media icons
-function initSocialIcons() {
-    const socialContainer = document.getElementById('socialIcons');
-
-    // Social media links with SVG icons
-    const socialLinks = [
-        {
-            label: 'Facebook',
-            url: 'https://www.facebook.com/share/1C28bQvHAD/?mibextid=wwXIfr',
-            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>`
-        },
-        {
-            label: 'Instagram',
-            url: 'https://instagram.com/sweethomes-bnb',
-            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>`
-        },
-        {
-            label: 'TikTok',
-            url: 'https://tiktok.com/@sweethomes-bnb',
-            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 1 0-1 13.6 6.84 6.84 0 0 0 6.45-6.84V6.65a5 5 0 0 0 1.95 2.05l.12.04v-3.8z"></path></svg>`
-        },
-    ];
-
-    socialContainer.innerHTML = ''; // Clear existing content
-
-    socialLinks.forEach(social => {
-        const link = document.createElement('a');
-        link.href = social.url;
-        link.className = 'social-icon';
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.setAttribute('aria-label', social.label);
-        link.innerHTML = social.icon; // Use innerHTML for SVGs
-
-        socialContainer.appendChild(link);
-    });
 }
 
 // Animate elements on scroll
@@ -441,9 +337,6 @@ function initLogoAnimation() {
     const logo = document.getElementById('heroLogo');
     if (logo) {
         // Animation continues indefinitely as per user request
-        // setTimeout(() => {
-        //     logo.classList.remove('animate-swing');
-        // }, 9000);
     }
 }
 
@@ -502,7 +395,40 @@ function initPromoBanner() {
     }, 5000); // Switch every 5 seconds
 }
 
-// Add to initialization
-document.addEventListener('DOMContentLoaded', () => {
-    initPromoBanner();
-});
+// Add social media icons
+function initSocialIcons() {
+    const socialContainer = document.getElementById('socialIcons');
+    if (!socialContainer) return;
+
+    // Social media links with SVG icons
+    const socialLinks = [
+        {
+            label: 'Facebook',
+            url: 'https://www.facebook.com/share/1C28bQvHAD/?mibextid=wwXIfr',
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>`
+        },
+        {
+            label: 'Instagram',
+            url: 'https://www.instagram.com/sweet_homes_nakuru?igsh=MXI3N3Qwd2d6Mnc3MQ==',
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>`
+        },
+        {
+            label: 'TikTok',
+            url: 'https://www.tiktok.com/@bnb_nakuru?_r=1&_t=ZM-92lQI0u5h6K',
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 1 0-1 13.6 6.84 6.84 0 0 0 6.45-6.84V6.65a5 5 0 0 0 1.95 2.05l.12.04v-3.8z"></path></svg>`
+        },
+    ];
+
+    socialContainer.innerHTML = ''; // Clear existing content
+
+    socialLinks.forEach(social => {
+        const link = document.createElement('a');
+        link.href = social.url;
+        link.className = 'social-icon';
+        link.innerHTML = social.icon;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', social.label);
+        socialContainer.appendChild(link);
+    });
+}
