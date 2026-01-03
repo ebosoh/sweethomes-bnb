@@ -1428,3 +1428,48 @@ a:hover {
     left: 0;
     font-weight: bold;
 }
+
+
+/* ============================================
+   PREMIUM PROMO BANNER
+   ============================================ */
+.promo-banner {
+    background: linear-gradient(90deg, #0a2341 0%, #102a4e 50%, #0a2341 100%);
+    text-align: center;
+    padding: var(--space-sm) var(--space-md);
+    font-family: var(--font-family-heading);
+    font-weight: 700;
+    font-size: var(--font-base);
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid rgba(209, 165, 62, 0.3);
+    position: relative;
+    z-index: var(--z-sticky);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.promo-text {
+    display: inline-block;
+    transition: opacity 0.5s ease-in-out;
+    background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3);
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* Mobile Optimization for Banner */
+@media (max-width: 768px) {
+    .promo-banner {
+        font-size: var(--font-sm);
+        padding: var(--space-xs) var(--space-sm);
+    }
+}
