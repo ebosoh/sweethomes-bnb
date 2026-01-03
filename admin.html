@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - sweethomes-bnb</title>
+    <style>
+        :root {
+            --primary: #c5a47e;
+            --secondary: #2b2b2b;
+            --light: #f4f4f4;
+            --white: #ffffff;
+            --danger: #dc3545;
+            --success: #28a745;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--light);
+            color: var(--secondary);
+        }
+
+        /* Login Screen */
+        #loginScreen {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('property-1.jpg');
+            background-size: cover;
+        }
+
+        .login-card {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-card h2 {
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        /* Dashboard */
+        #dashboard {
+            display: none;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: var(--secondary);
+            color: var(--white);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding-top: 20px;
+        }
+
+        .sidebar h3 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--primary);
+        }
+
+        .nav-btn {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            background: none;
+            border: none;
+            color: var(--white);
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .nav-btn:hover,
+        .nav-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        th,
+        td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        /* Widgets */
+        .card {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .price-input-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .price-input-group label {
+            width: 120px;
+            font-weight: bold;
+        }
+
+        .price-input-group input {
+            margin-bottom: 0;
+            width: 150px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            display: none;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+
+            .sidebar,
+            #loginScreen,
+            .no-print {
+                display: none;
+            }
+
+            .main-content {
+                margin: 0;
+                padding: 0;
+            }
+
+            .section {
+                display: block;
+            }
+
+            table {
+                border: 1px solid #000;
+            }
+
+            th,
+            td {
+                border: 1px solid #000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="loginScreen">
+        <div class="login-card">
+            <h2>Admin Login</h2>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+                <p id="loginError" style="color: var(--danger); margin-top: 10px; display: none;">Invalid Credentials
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard">
+        <nav class="sidebar">
+            <h3>SweetHomes Admin</h3>
+            <button class="nav-btn active" onclick="showSection('bookings')">Bookings</button>
+            <button class="nav-btn" onclick="showSection('prices')">Manage Prices</button>
+            <button class="nav-btn" onclick="showSection('gallery')">Gallery Uploads</button>
+            <button class="nav-btn" style="margin-top: auto;" onclick="logout()">Logout</button>
+        </nav>
+
+        <div class="main-content">
+
+            <!-- Bookings Section -->
+            <section id="bookings" class="section active">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h2>Bookings</h2>
+                    <button onclick="fetchBookings()" class="no-print" style="width: auto;">Refresh Data</button>
+                    <button onclick="window.print()" class="no-print" style="width: auto; background: #666;">Print
+                        Report</button>
+                </div>
+
+                <div class="card" style="overflow-x: auto;">
+                    <table id="bookingsTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Guest Name</th>
+                                <th>Phone</th>
+                                <th>Room Type</th>
+                                <th>Check-In</th>
+                                <th>Check-Out</th>
+                                <th>Total (KES)</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Data populated via JS -->
+                            <tr>
+                                <td colspan="8" style="text-align: center;">Loading...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Prices Section -->
+            <section id="prices" class="section">
+                <h2>Manage Prices</h2>
+                <div class="card">
+                    <p>Update generic room rates. Changes reflect on the website immediately.</p>
+
+                    <form id="priceForm">
+                        <div class="price-input-group">
+                            <label>Standard Room</label>
+                            <input type="number" id="priceStandard" placeholder="3500">
+                            <button type="button" onclick="updatePrice('Standard')" style="width: auto;">Update</button>
+                        </div>
+
+                        <div class="price-input-group">
+                            <label>Deluxe Room</label>
+                            <input type="number" id="priceDeluxe" placeholder="4500">
+                            <button type="button" onclick="updatePrice('Deluxe')" style="width: auto;">Update</button>
+                        </div>
+
+                        <div class="price-input-group">
+                            <label>Suite</label>
+                            <input type="number" id="priceSuite" placeholder="6500">
+                            <button type="button" onclick="updatePrice('Suite')" style="width: auto;">Update</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Gallery Section -->
+            <section id="gallery" class="section">
+                <h2>Gallery Uploads</h2>
+                <div class="card">
+                    <p>Upload new images to the homepage carousel.</p>
+                    <form id="uploadForm">
+                        <input type="file" id="imageInput" accept="image/*" required>
+                        <input type="text" id="imageCaption" placeholder="Caption (Optional)">
+                        <button type="submit">Upload Image</button>
+                    </form>
+                    <p id="uploadStatus" style="margin-top: 10px;"></p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+
+</html>
