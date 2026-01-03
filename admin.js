@@ -4,7 +4,7 @@
 
 // CONFIGURATION
 // REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzorDVhYk_bJiUpMdDw5OqxqWHa-OGb_MXT3mImE8B0ymEt1CZmYi3pRy4yYfF0YN96/exec';
+const BACKEND_URL = 'REPLACE_WITH_YOUR_WEB_APP_URL';
 
 // STATE
 let currentUserToken = localStorage.getItem('adminToken');
@@ -169,9 +169,9 @@ async function fetchCurrentPrices() {
         const data = await response.json();
 
         if (data.status === 'success' && data.prices) {
-            if (document.getElementById('priceStandard')) document.getElementById('priceStandard').value = data.prices['Standard'] || '';
-            if (document.getElementById('priceDeluxe')) document.getElementById('priceDeluxe').value = data.prices['Deluxe'] || '';
-            if (document.getElementById('priceSuite')) document.getElementById('priceSuite').value = data.prices['Suite'] || '';
+            if (document.getElementById('price1Bedroom')) document.getElementById('price1Bedroom').value = data.prices['1 Bedroom'] || '';
+            if (document.getElementById('price2Bedroom')) document.getElementById('price2Bedroom').value = data.prices['2 Bedroom'] || '';
+            if (document.getElementById('price3Bedroom')) document.getElementById('price3Bedroom').value = data.prices['3 Bedroom'] || '';
         }
     } catch (err) {
         console.error('Failed to load prices', err);

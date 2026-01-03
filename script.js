@@ -4,7 +4,7 @@
 
 // CONFIGURATION
 // REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzorDVhYk_bJiUpMdDw5OqxqWHa-OGb_MXT3mImE8B0ymEt1CZmYi3pRy4yYfF0YN96/exec';
+const BACKEND_URL = 'REPLACE_WITH_YOUR_WEB_APP_URL';
 
 // ============================================
 // DYNAMIC DATA LOADING
@@ -55,20 +55,12 @@ function updatePrices(prices) {
 
     // Map backend keys to select options
     for (const [key, price] of Object.entries(prices)) {
-        // Find option with text matching key (e.g., "Standard Room")
-        // Or better, assume values: 'standard', 'deluxe', 'suite' match keys 'Standard', 'Deluxe', 'Suite'
+        // Direct match logic for "1 Bedroom", "2 Bedroom", "3 Bedroom"
+        // The backend key (e.g., "1 Bedroom") should match the option value in HTML
 
-        let optionValue = key.toLowerCase();
-        // Handle potential mismatch if keys are "Standard Room" vs "standard"
-        if (key.includes('Standard')) optionValue = 'standard';
-        else if (key.includes('Deluxe')) optionValue = 'deluxe';
-        else if (key.includes('Suite')) optionValue = 'suite';
-
-        const option = roomSelect.querySelector(`option[value="${optionValue}"]`);
+        const option = roomSelect.querySelector(`option[value="${key}"]`);
         if (option) {
             option.setAttribute('data-price', price);
-            // Optional: Update text to show new price? e.g. "Standard Room - KES 3500"
-            // For now, just update data-price for calculation logic
         }
     }
 }
