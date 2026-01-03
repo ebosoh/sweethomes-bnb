@@ -2,13 +2,124 @@
 // sweethomes-bnb - JavaScript Functionality
 // ============================================
 
+// CONFIGURATION
+// REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzorDVhYk_bJiUpMdDw5OqxqWHa-OGb_MXT3mImE8B0ymEt1CZmYi3pRy4yYfF0YN96/exec';
+
 // ============================================
-// CAROUSEL FUNCTIONALITY
+// DYNAMIC DATA LOADING
+// ============================================
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize features first (static content)
+    initSmoothScroll();
+    initSocialIcons();
+    initScrollAnimations();
+    initLogoAnimation();
+    initPromoBanner();
+
+    // 2. Fetch Dynamic Data (Prices & Images)
+    if (BACKEND_URL && !BACKEND_URL.includes('REPLACE')) {
+        fetchDynamicData();
+    } else {
+        console.warn('Backend URL not configured. Using static defaults.');
+        // Initialize carousel/form with static defaults if backend missing
+        initializeComponents();
+    }
+});
+
+async function fetchDynamicData() {
+    try {
+        const response = await fetch(`${BACKEND_URL}?action=getData`);
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            // Update Prices
+            if (data.prices) updatePrices(data.prices);
+
+            // Update Images
+            if (data.images && data.images.length > 0) {
+                updateCarousel(data.images);
+            } else {
+                initializeComponents(); // Fallback to existing if no images
+            }
+        }
+    } catch (err) {
+        console.error('Failed to load dynamic data:', err);
+        initializeComponents(); // Fallback on error
+    }
+}
+
+function updatePrices(prices) {
+    const roomSelect = document.getElementById('roomType');
+    if (!roomSelect) return;
+
+    // Map backend keys to select options
+    for (const [key, price] of Object.entries(prices)) {
+        // Find option with text matching key (e.g., "Standard Room")
+        // Or better, assume values: 'standard', 'deluxe', 'suite' match keys 'Standard', 'Deluxe', 'Suite'
+
+        let optionValue = key.toLowerCase();
+        // Handle potential mismatch if keys are "Standard Room" vs "standard"
+        if (key.includes('Standard')) optionValue = 'standard';
+        else if (key.includes('Deluxe')) optionValue = 'deluxe';
+        else if (key.includes('Suite')) optionValue = 'suite';
+
+        const option = roomSelect.querySelector(`option[value="${optionValue}"]`);
+        if (option) {
+            option.setAttribute('data-price', price);
+            // Optional: Update text to show new price? e.g. "Standard Room - KES 3500"
+            // For now, just update data-price for calculation logic
+        }
+    }
+}
+
+function updateCarousel(images) {
+    const track = document.getElementById('carouselTrack');
+    const dotsContainer = document.getElementById('carouselDots');
+
+    if (!track || !dotsContainer) return;
+
+    // Clear existing (static) slides
+    track.innerHTML = '';
+    dotsContainer.innerHTML = '';
+
+    // Add new slides
+    images.forEach((img, index) => {
+        // Slide
+        const slide = document.createElement('li');
+        slide.className = 'carousel-slide';
+        if (index === 0) slide.classList.add('active'); // First one active
+
+        const image = document.createElement('img');
+        image.src = img.url;
+        image.alt = img.caption || `Property Image ${index + 1}`;
+
+        slide.appendChild(image);
+        track.appendChild(slide);
+    });
+
+    // Re-initialize Carousel Class with new DOM
+    new Carousel(document.getElementById('propertyCarousel'));
+}
+
+function initializeComponents() {
+    // Initialize carousel with whatever is in the DOM
+    const carouselElement = document.getElementById('propertyCarousel');
+    if (carouselElement) new Carousel(carouselElement);
+
+    // Initialize booking form
+    const bookingForm = document.getElementById('bookingForm');
+    if (bookingForm) new BookingForm(bookingForm);
+}
+
+// ============================================
+// CAROUSEL FUNCTIONALITY (Existing Class)
 // ============================================
 class Carousel {
     constructor(carouselElement) {
         this.carousel = carouselElement;
         this.track = this.carousel.querySelector('#carouselTrack');
+        // Re-query slides in case they were dynamically added
         this.slides = Array.from(this.track.children);
         this.nextButton = this.carousel.querySelector('#carouselNext');
         this.prevButton = this.carousel.querySelector('#carouselPrev');
@@ -20,72 +131,51 @@ class Carousel {
         this.touchEndX = 0;
         this.isTransitioning = false;
 
+        // Cleanup old listeners if re-initializing? 
+        // Simplest way for MVP is just to attach new ones. 
+        // ideally we'd remove old ones but for this scope it's fine.
+
         this.init();
     }
 
     init() {
         // Set initial active slide
         if (this.slides.length > 0) {
+            this.slides.forEach(s => s.classList.remove('active')); // Reset
             this.slides[0].classList.add('active');
         }
 
         // Create dots
         this.createDots();
 
-        // Event listeners
-        this.nextButton.addEventListener('click', () => this.moveToNext());
-        this.prevButton.addEventListener('click', () => this.moveToPrev());
+        // Event listeners (Clear old ones by cloning? No, just add. Watch for duplicates in full app)
+        // For safety, let's assume this runs once per element lifecycle.
+
+        // Remove existing listeners hack: clone node (strips listeners)
+        // this.nextButton.replaceWith(this.nextButton.cloneNode(true));
+        // this.nextButton = this.carousel.querySelector('#carouselNext');
+
+        // Actually, let's just stick to adding them. 
+        this.nextButton.onclick = () => this.moveToNext();
+        this.prevButton.onclick = () => this.moveToPrev();
+
+        // Dots
+        // this.createDots handles dot listeners
 
         // Touch/swipe support
-        this.track.addEventListener('touchstart', (e) => this.handleTouchStart(e), { passive: true });
-        this.track.addEventListener('touchend', (e) => this.handleTouchEnd(e), { passive: true });
+        this.track.ontouchstart = (e) => this.handleTouchStart(e);
+        this.track.ontouchend = (e) => this.handleTouchEnd(e);
 
-        // Mouse drag support (desktop)
-        let isDragging = false;
-        let startX = 0;
-
-        this.track.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX;
-            this.track.style.cursor = 'grabbing';
-        });
-
-        this.track.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault();
-        });
-
-        this.track.addEventListener('mouseup', (e) => {
-            if (!isDragging) return;
-            isDragging = false;
-            this.track.style.cursor = 'grab';
-
-            const endX = e.clientX;
-            const diff = startX - endX;
-
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) {
-                    this.moveToNext();
-                } else {
-                    this.moveToPrev();
-                }
-            }
-        });
-
-        this.track.addEventListener('mouseleave', () => {
-            isDragging = false;
-            this.track.style.cursor = 'grab';
-        });
+        // Hover
+        this.carousel.onmouseenter = () => this.stopAutoplay();
+        this.carousel.onmouseleave = () => this.startAutoplay();
 
         // Start autoplay
         this.startAutoplay();
-
-        // Pause autoplay on hover
-        this.carousel.addEventListener('mouseenter', () => this.stopAutoplay());
-        this.carousel.addEventListener('mouseleave', () => this.startAutoplay());
     }
 
     createDots() {
+        this.dotsContainer.innerHTML = ''; // Clear existing
         this.slides.forEach((_, index) => {
             const dot = document.createElement('button');
             dot.classList.add('carousel-dot');
@@ -165,9 +255,10 @@ class Carousel {
     }
 
     startAutoplay() {
+        if (this.autoplayInterval) clearInterval(this.autoplayInterval);
         this.autoplayInterval = setInterval(() => {
             this.moveToNext();
-        }, 5000); // Change slide every 5 seconds
+        }, 5000);
     }
 
     stopAutoplay() {
@@ -195,11 +286,11 @@ class BookingForm {
     init() {
         // Set minimum date to today
         const today = new Date().toISOString().split('T')[0];
-        document.getElementById('arrivalDate').setAttribute('min', today);
-        document.getElementById('departureDate').setAttribute('min', today);
+        document.getElementById('arrivalDate')?.setAttribute('min', today);
+        document.getElementById('departureDate')?.setAttribute('min', today);
 
         // Update departure min date when arrival date changes
-        document.getElementById('arrivalDate').addEventListener('change', (e) => {
+        document.getElementById('arrivalDate')?.addEventListener('change', (e) => {
             const arrivalDate = e.target.value;
             document.getElementById('departureDate').setAttribute('min', arrivalDate);
 
@@ -213,25 +304,25 @@ class BookingForm {
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
 
         // Real-time price calculation events
-        document.getElementById('roomType').addEventListener('change', () => this.calculateTotal());
-        document.getElementById('arrivalDate').addEventListener('change', () => this.calculateTotal());
-        document.getElementById('departureDate').addEventListener('change', () => this.calculateTotal());
+        document.getElementById('roomType')?.addEventListener('change', () => this.calculateTotal());
+        document.getElementById('arrivalDate')?.addEventListener('change', () => this.calculateTotal());
+        document.getElementById('departureDate')?.addEventListener('change', () => this.calculateTotal());
     }
 
-    handleSubmit(e) {
-        e.preventDefault(); // Prevent default form submission
+    async handleSubmit(e) {
+        e.preventDefault();
 
         if (!this.validateForm()) {
-            return; // Stop if validation fails
+            return;
         }
 
         // Collect form data
-        // For international phone, combining code and number
         const countryCode = document.getElementById('countryCode').value;
         const rawMobile = document.getElementById('mobile').value;
         const fullPhoneNumber = countryCode === 'other' ? rawMobile : `${countryCode} ${rawMobile}`;
 
         const formData = {
+            action: 'book', // Important: Tell backend this is a booking
             fullName: document.getElementById('fullName').value,
             nationality: document.getElementById('nationality').value,
             phoneNumber: fullPhoneNumber,
@@ -243,31 +334,68 @@ class BookingForm {
             arrivalTime: document.getElementById('arrivalTime').value,
             departureDate: document.getElementById('departureDate').value,
             departureTime: document.getElementById('departureTime').value,
+            totalPrice: this.calculateTotal(true) // Helper to get raw number
         };
 
-        console.log('Form Data Submitted:', formData);
+        const submitBtn = document.getElementById('submitBooking');
+        const originalBtnText = submitBtn.innerText;
+        submitBtn.innerText = 'Processing...';
+        submitBtn.disabled = true;
 
-        // Here you would typically send the formData to a server
-        // For demonstration, we'll just show an alert
-        alert('Booking submitted successfully!\n' + JSON.stringify(formData, null, 2));
+        try {
+            if (BACKEND_URL && !BACKEND_URL.includes('REPLACE')) {
+                // Send to Google Sheets
+                // Use no-cors mode if issues, but CORS should be handled by GAS "Everyone" permissions
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(formData)
+                });
 
-        // Optionally, reset the form
+                const result = await response.json();
+                if (result.status === 'success') {
+                    this.showSuccess();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            } else {
+                console.warn('Backend not connected. Simulating success.');
+                alert('Backend URL not configured. Submitting locally only.');
+                this.showSuccess();
+            }
+        } catch (err) {
+            console.error('Submission Error:', err);
+            alert('There was an error submitting your booking. Please try again or contact us directly.');
+        } finally {
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
+        }
+    }
+
+    showSuccess() {
         this.form.reset();
         document.getElementById('totalPriceDisplay').innerText = 'KES 0';
         const priceRow = document.querySelector('.total-price-row');
         if (priceRow) priceRow.style.display = 'none';
+
+        // Show success message
+        const successDiv = document.getElementById('bookingSuccess');
+        if (successDiv) {
+            successDiv.classList.remove('hidden');
+            successDiv.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert('Booking Confirmed!');
+        }
     }
 
-    calculateTotal() {
+    calculateTotal(returnNumber = false) {
         const roomSelect = document.getElementById('roomType');
         const arrivalInput = document.getElementById('arrivalDate');
         const departureInput = document.getElementById('departureDate');
         const totalDisplay = document.getElementById('totalPriceDisplay');
         const priceRow = document.querySelector('.total-price-row');
 
-        // Reset
-        totalDisplay.innerText = 'KES 0';
-        console.log('Calculating Total...');
+        // Reset display
+        if (!returnNumber) totalDisplay.innerText = 'KES 0';
 
         const selectedOption = roomSelect.options[roomSelect.selectedIndex];
         const pricePerNight = parseInt(selectedOption ? selectedOption.getAttribute('data-price') : 0);
@@ -280,9 +408,13 @@ class BookingForm {
 
             const totalPrice = pricePerNight * diffDays;
 
+            if (returnNumber) return totalPrice;
+
             totalDisplay.innerText = `KES ${totalPrice.toLocaleString()} (${diffDays} nights)`;
             if (priceRow) priceRow.style.display = 'block';
         }
+
+        return returnNumber ? 0 : null;
     }
 
     validateForm() {
@@ -305,6 +437,12 @@ class BookingForm {
 
         return true;
     }
+}
+
+// Reset form function for the success message button
+window.resetBookingForm = function () {
+    document.getElementById('bookingSuccess').classList.add('hidden');
+    document.getElementById('bookingForm').reset();
 }
 
 // Animate elements on scroll
@@ -334,41 +472,20 @@ function initScrollAnimations() {
 
 // Stop logo animation after a few swings
 function initLogoAnimation() {
-    const logo = document.getElementById('heroLogo');
-    if (logo) {
-        // Animation continues indefinitely as per user request
-    }
+    // Kept running as per user request
 }
 
-// ============================================
-// INITIALIZATION
-// ============================================
-document.addEventListener('DOMContentLoaded', () => {
-    // Initialize carousel
-    const carouselElement = document.getElementById('propertyCarousel');
-    if (carouselElement) {
-        new Carousel(carouselElement);
-    }
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+}
 
-    // Initialize booking form
-    const bookingForm = document.getElementById('bookingForm');
-    if (bookingForm) {
-        new BookingForm(bookingForm);
-    }
-
-    // Initialize other features
-    initSmoothScroll();
-    initSocialIcons();
-    initScrollAnimations();
-    initLogoAnimation();
-
-    console.log('sweethomes-bnb initialized successfully!');
-});
-
-
-/* ============================================
-   PROMO BANNER LOGIC
-   ============================================ */
 function initPromoBanner() {
     const promoText = document.getElementById('promoText');
     if (!promoText) return;
@@ -391,44 +508,13 @@ function initPromoBanner() {
 
             // Fade in
             promoText.style.opacity = '1';
-        }, 500); // Wait for fade out to complete
-    }, 5000); // Switch every 5 seconds
+        }, 500);
+    }, 5000);
 }
 
 // Add social media icons
 function initSocialIcons() {
-    const socialContainer = document.getElementById('socialIcons');
-    if (!socialContainer) return;
-
-    // Social media links with SVG icons
-    const socialLinks = [
-        {
-            label: 'Facebook',
-            url: 'https://www.facebook.com/share/1C28bQvHAD/?mibextid=wwXIfr',
-            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>`
-        },
-        {
-            label: 'Instagram',
-            url: 'https://www.instagram.com/sweet_homes_nakuru?igsh=MXI3N3Qwd2d6Mnc3MQ==',
-            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>`
-        },
-        {
-            label: 'TikTok',
-            url: 'https://www.tiktok.com/@bnb_nakuru?_r=1&_t=ZM-92lQI0u5h6K',
-            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 1 0-1 13.6 6.84 6.84 0 0 0 6.45-6.84V6.65a5 5 0 0 0 1.95 2.05l.12.04v-3.8z"></path></svg>`
-        },
-    ];
-
-    socialContainer.innerHTML = ''; // Clear existing content
-
-    socialLinks.forEach(social => {
-        const link = document.createElement('a');
-        link.href = social.url;
-        link.className = 'social-icon';
-        link.innerHTML = social.icon;
-        link.target = '_blank';
-        link.rel = 'noopener noreferrer';
-        link.setAttribute('aria-label', social.label);
-        socialContainer.appendChild(link);
-    });
+    // Icons are now hardcoded in HTML for stability, 
+    // but we can keep this for future dynamic enhancements if needed.
+    // Currently, it does nothing as we changed strategy.
 }
