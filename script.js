@@ -61,6 +61,17 @@ function updatePrices(prices) {
         const option = roomSelect.querySelector(`option[value="${key}"]`);
         if (option) {
             option.setAttribute('data-price', price);
+            // Update visible text: "1 Bedroom (Max 2 Guests) - KES 3,500/night"
+            // We split by " - " to preserve the name/guest part
+            const currentText = option.innerText.split(' - ')[0];
+            option.innerText = `${currentText} - KES ${Number(price).toLocaleString()}/night`;
+        }
+
+        // Update Room Cards (Key is "1 Bedroom" -> ID "priceDisplay1Bedroom")
+        const cardId = 'priceDisplay' + key.replace(' ', '');
+        const cardPriceSpan = document.getElementById(cardId);
+        if (cardPriceSpan) {
+            cardPriceSpan.innerText = `KES ${Number(price).toLocaleString()}`;
         }
     }
 }
