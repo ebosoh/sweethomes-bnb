@@ -4,7 +4,7 @@
 
 // CONFIGURATION
 // REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-const BACKEND_URL = 'REPLACE_WITH_YOUR_WEB_APP_URL';
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzorDVhYk_bJiUpMdDw5OqxqWHa-OGb_MXT3mImE8B0ymEt1CZmYi3pRy4yYfF0YN96/exec';
 
 // ============================================
 // DYNAMIC DATA LOADING
@@ -54,7 +54,14 @@ function updatePrices(prices) {
     if (!roomSelect) return;
 
     // Map backend keys to select options
-    for (const [key, price] of Object.entries(prices)) {
+    for (const [rawKey, price] of Object.entries(prices)) {
+        let key = rawKey;
+
+        // Fallback Mapping for Legacy Sheet Names
+        if (rawKey === 'Standard' || rawKey === 'Standard Room') key = '1 Bedroom';
+        if (rawKey === 'Deluxe' || rawKey === 'Deluxe Room') key = '2 Bedroom';
+        if (rawKey === 'Suite' || rawKey === 'Executive Suite') key = '3 Bedroom';
+
         // Direct match logic for "1 Bedroom", "2 Bedroom", "3 Bedroom"
         // The backend key (e.g., "1 Bedroom") should match the option value in HTML
 
