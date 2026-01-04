@@ -4,7 +4,7 @@
 
 // CONFIGURATION
 // REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-const BACKEND_URL = 'REPLACE_WITH_YOUR_WEB_APP_URL';
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzorDVhYk_bJiUpMdDw5OqxqWHa-OGb_MXT3mImE8B0ymEt1CZmYi3pRy4yYfF0YN96/exec';
 
 // STATE
 let currentUserToken = localStorage.getItem('adminToken');
