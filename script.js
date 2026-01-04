@@ -32,7 +32,7 @@ async function fetchDynamicData() {
         const response = await fetch(`${BACKEND_URL}?action=getData`);
         const data = await response.json();
 
-            if (data.status === 'success') {
+        if (data.status === 'success') {
             // Update Prices
             if (data.prices) updatePrices(data.prices);
 
@@ -40,7 +40,7 @@ async function fetchDynamicData() {
             if (data.images && data.images.length > 0) {
                 updateCarousel(data.images);
             }
-            
+
             // Always initialize components (booking form needs to run regardless of images)
             initializeComponents();
         }
@@ -109,8 +109,7 @@ function updateCarousel(images) {
         track.appendChild(slide);
     });
 
-    // Re-initialize Carousel Class with new DOM
-    new Carousel(document.getElementById('propertyCarousel'));
+    // Note: Carousel class is initialized in initializeComponents() which is called after this return
 }
 
 function initializeComponents() {
