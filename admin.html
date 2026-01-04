@@ -283,6 +283,71 @@
             }
         }
 
+        /* Calendar Tabs */
+        .calendar-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 24px;
+            cursor: pointer;
+            font-size: 16px;
+            color: var(--secondary);
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            width: auto;
+        }
+
+        .tab-btn:hover {
+            background: rgba(197, 164, 126, 0.1);
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+            font-weight: bold;
+        }
+
+        .calendar-container {
+            position: relative;
+        }
+
+        .calendar-iframe {
+            display: none;
+        }
+
+        .calendar-iframe.active {
+            display: block;
+        }
+
+        @media screen and (max-width: 768px) {
+            .calendar-tabs {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .tab-btn {
+                width: 100%;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+                border-left: 3px solid transparent;
+            }
+
+            .tab-btn.active {
+                border-bottom-color: #ddd;
+                border-left-color: var(--primary);
+            }
+
+            .calendar-iframe iframe {
+                height: 400px;
+            }
+        }
+
         @media print {
 
             .sidebar,
@@ -340,6 +405,7 @@
         <nav class="sidebar" id="sidebar">
             <h3>SweetHomes Admin</h3>
             <button class="nav-btn active" onclick="showSection('bookings')">Bookings</button>
+            <button class="nav-btn" onclick="showSection('calendars')">Calendars</button>
             <button class="nav-btn" onclick="showSection('prices')">Manage Prices</button>
             <button class="nav-btn" onclick="showSection('gallery')">Gallery Uploads</button>
             <button class="nav-btn" style="margin-top: auto;" onclick="logout()">Logout</button>
@@ -377,6 +443,44 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+            </section>
+
+            <!-- Calendars Section -->
+            <section id="calendars" class="section">
+                <h2>Booking Calendars</h2>
+                <div class="card">
+                    <div class="calendar-tabs">
+                        <button class="tab-btn active" onclick="switchCalendar('1bedroom')">1 Bedroom</button>
+                        <button class="tab-btn" onclick="switchCalendar('2bedroom')">2 Bedroom</button>
+                        <button class="tab-btn" onclick="switchCalendar('3bedroom')">3 Bedroom</button>
+                    </div>
+
+                    <div class="calendar-container">
+                        <div id="calendar-1bedroom" class="calendar-iframe active">
+                            <iframe
+                                src="https://calendar.google.com/calendar/embed?src=c_52478e36685ed17275014a752b5f09ab2207b2310f1fc49ccd656755b223d2d7%40group.calendar.google.com&ctz=Africa%2FNairobi"
+                                style="border: 0; width: 100%; height: calc(100vh - 220px); min-height: 600px;"
+                                frameborder="0" scrolling="no">
+                            </iframe>
+                        </div>
+                        <div id="calendar-2bedroom" class="calendar-iframe">
+                            <iframe
+                                src="https://calendar.google.com/calendar/embed?src=c_099e929c30632a7ce627b295b38d5ba9ac2b0de9c9df5fc544c7da6829b38d12%40group.calendar.google.com&ctz=Africa%2FNairobi"
+                                style="border: 0; width: 100%; height: calc(100vh - 220px); min-height: 600px;"
+                                frameborder="0" scrolling="no">
+                            </iframe>
+                        </div>
+                        <div id="calendar-3bedroom" class="calendar-iframe">
+                            <iframe
+                                src="https://calendar.google.com/calendar/embed?src=c_b774c830d47da3197c6a44085fb595ec92eb57d8b185ade6d2bed81ccc8eaa97%40group.calendar.google.com&ctz=Africa%2FNairobi"
+                                style="border: 0; width: 100%; height: calc(100vh - 220px); min-height: 600px;"
+                                frameborder="0" scrolling="no">
+                            </iframe>
+                        </div>
+                    </div>
+
+
                 </div>
             </section>
 
