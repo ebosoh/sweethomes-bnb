@@ -97,12 +97,13 @@ function updateCarousel(images) {
     // Add new slides
     images.forEach((img, index) => {
         // Slide
-        const slide = document.createElement('li');
+        const slide = document.createElement('div');
         slide.className = 'carousel-slide';
         if (index === 0) slide.classList.add('active'); // First one active
 
         const image = document.createElement('img');
         image.src = img.url;
+        image.className = 'carousel-image'; // Add class for styling
         image.alt = img.caption || `Property Image ${index + 1}`;
 
         slide.appendChild(image);
