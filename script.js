@@ -102,9 +102,24 @@ function updateCarousel(images) {
         if (index === 0) slide.classList.add('active'); // First one active
 
         const image = document.createElement('img');
-        image.src = img.url;
+
+        // Handle Google Drive Links to ensure they display
+        let imageUrl = img.url;
+        if (imageUrl.includes('drive.google.com') && imageUrl.includes('id=')) {
+            const idMatch = imageUrl.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                // Use the reliable thumbnail/view URL format for Drive images
+                imageUrl = `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
+            }
+        }
+
+        image.src = imageUrl;
         image.className = 'carousel-image'; // Add class for styling
         image.alt = img.caption || `Property Image ${index + 1}`;
+        // Add error fallback
+        image.onerror = function () {
+            this.src = 'https://via.placeholder.com/800x600?text=Image+Not+Available';
+        };
 
         slide.appendChild(image);
         track.appendChild(slide);
