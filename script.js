@@ -4,7 +4,7 @@
 
 // CONFIGURATION
 // REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzorDVhYk_bJiUpMdDw5OqxqWHa-OGb_MXT3mImE8B0ymEt1CZmYi3pRy4yYfF0YN96/exec';
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbw-4HSOePgfTWnocH5i1hCuBv4j9GgfjNumqz_YcrMIipYAZ1mSh1Noo1iMArW8EMlfJQ/exec';
 
 // ============================================
 // DYNAMIC DATA LOADING
