@@ -117,6 +117,21 @@ function showSection(sectionId) {
 }
 
 // ============================================
+// CALENDARS
+// ============================================
+function switchCalendar(calendarType) {
+    // Hide all calendar iframes
+    document.querySelectorAll('.calendar-iframe').forEach(el => el.classList.remove('active'));
+    // Show selected calendar
+    document.getElementById(`calendar-${calendarType}`).classList.add('active');
+
+    // Update tab buttons
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+}
+
+
+// ============================================
 // BOOKINGS
 // ============================================
 async function fetchBookings() {
