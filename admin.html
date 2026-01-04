@@ -221,12 +221,74 @@
             }
         }
 
-        /* Print Styles */
+        /* Mobile Responsive Styles */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1001;
+            background: var(--secondary);
+            color: var(--white);
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1000;
+                width: 100%;
+                /* Full width menu on mobile */
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+                padding: 60px 20px 20px 20px;
+                /* Top padding for toggle button */
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+            }
+
+            /* Stack price inputs */
+            .price-input-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .price-input-group input {
+                width: 100%;
+            }
+
+            .card {
+                padding: 15px;
+            }
+        }
+
         @media print {
 
             .sidebar,
             #loginScreen,
-            .no-print {
+            .no-print,
+            .mobile-toggle {
                 display: none;
             }
 
@@ -274,7 +336,8 @@
 
     <!-- Dashboard -->
     <div id="dashboard">
-        <nav class="sidebar">
+        <button class="mobile-toggle" onclick="toggleSidebar()">☰ Menu</button>
+        <nav class="sidebar" id="sidebar">
             <h3>SweetHomes Admin</h3>
             <button class="nav-btn active" onclick="showSection('bookings')">Bookings</button>
             <button class="nav-btn" onclick="showSection('prices')">Manage Prices</button>

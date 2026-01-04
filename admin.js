@@ -4,7 +4,7 @@
 
 // CONFIGURATION
 // REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL
-const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbzorDVhYk_bJiUpMdDw5OqxqWHa-OGb_MXT3mImE8B0ymEt1CZmYi3pRy4yYfF0YN96/exec';
+const BACKEND_URL = 'REPLACE_WITH_YOUR_WEB_APP_URL';
 
 // STATE
 let currentUserToken = localStorage.getItem('adminToken');
@@ -86,6 +86,13 @@ function logout() {
 // ============================================
 // NAVIGATION
 // ============================================
+
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('show');
+}
+
+// Close sidebar on mobile when a link is clicked
 function showSection(sectionId) {
     // Hide all sections
     document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
@@ -101,6 +108,11 @@ function showSection(sectionId) {
             btn.classList.add('active');
             break;
         }
+    }
+
+    // Close sidebar on mobile
+    if (window.innerWidth <= 768) {
+        document.getElementById('sidebar').classList.remove('show');
     }
 }
 
