@@ -177,10 +177,14 @@ function renderBookings(bookings) {
             <td>${b.Name}</td>
             <td>${b.Phone}</td>
             <td>${b.Room}</td>
-            <td>${b.Arrival}</td>
-            <td>${b.Departure}</td>
-            <td>KES ${b.Total}</td>
-            <td><span style="padding: 4px 8px; border-radius: 4px; background: #e6f4ea; color #1e7e34;">${b.Status}</span></td>
+            <td>${b.Arrival} ${b['Arrival Time'] || ''}</td>
+            <td>${b.Departure} ${b['Departure Time'] || ''}</td>
+            <td>KES ${Number(b.Total).toLocaleString()}</td>
+            <td>${b.Nationality || '-'}</td>
+            <td>${b.Address || '-'}</td>
+            <td>${b['ID/Passport'] || '-'}</td>
+            <td>${b['Car Plate'] || '-'}</td>
+            <td><span style="padding: 4px 8px; border-radius: 4px; background: #e6f4ea; color: #1e7e34;">${b.Status}</span></td>
         `;
         tableBody.appendChild(row);
     });

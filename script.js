@@ -32,16 +32,17 @@ async function fetchDynamicData() {
         const response = await fetch(`${BACKEND_URL}?action=getData`);
         const data = await response.json();
 
-        if (data.status === 'success') {
+            if (data.status === 'success') {
             // Update Prices
             if (data.prices) updatePrices(data.prices);
 
             // Update Images
             if (data.images && data.images.length > 0) {
                 updateCarousel(data.images);
-            } else {
-                initializeComponents(); // Fallback to existing if no images
             }
+            
+            // Always initialize components (booking form needs to run regardless of images)
+            initializeComponents();
         }
     } catch (err) {
         console.error('Failed to load dynamic data:', err);
