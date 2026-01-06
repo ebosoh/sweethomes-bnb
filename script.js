@@ -306,7 +306,25 @@ class Carousel {
 class BookingForm {
     constructor(formElement) {
         this.form = formElement;
+        this.exchangeRate = 0.0077; // Default fallback (approx 1/130)
         this.init();
+        this.fetchExchangeRate();
+    }
+
+    async fetchExchangeRate() {
+        try {
+            // Using a free API (ExchangeRate-API)
+            const response = await fetch('https://api.exchangerate-api.com/v4/latest/KES');
+            const data = await response.json();
+            if (data && data.rates && data.rates.USD) {
+                this.exchangeRate = data.rates.USD;
+                console.log('Updated Exchange Rate (KES->USD):', this.exchangeRate);
+                // Recalculate if price is already showing
+                this.calculateTotal();
+            }
+        } catch (e) {
+            console.warn('Failed to fetch exchange rate, using default.', e);
+        }
     }
 
     init() {
@@ -401,6 +419,7 @@ class BookingForm {
     showSuccess() {
         this.form.reset();
         document.getElementById('totalPriceDisplay').innerText = 'KES 0';
+        if (document.getElementById('totalPriceDisplayUSD')) document.getElementById('totalPriceDisplayUSD').innerText = 'USD 0.00';
         const priceRow = document.querySelector('.total-price-row');
         if (priceRow) priceRow.style.display = 'none';
 
@@ -438,7 +457,15 @@ class BookingForm {
             if (returnNumber) return totalPrice;
 
             totalDisplay.innerText = `KES ${totalPrice.toLocaleString()} (${diffDays} nights)`;
-            if (priceRow) priceRow.style.display = 'block';
+
+            // USD Calculation
+            const totalPriceUSD = totalPrice * this.exchangeRate;
+            const usdDisplay = document.getElementById('totalPriceDisplayUSD');
+            if (usdDisplay) {
+                usdDisplay.innerText = `USD ${totalPriceUSD.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            }
+
+            if (priceRow) priceRow.style.display = 'flex';
         }
 
         return returnNumber ? 0 : null;
