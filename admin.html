@@ -623,19 +623,23 @@
                             <div id="searchLoader" class="spinner"></div>
                         </div>
 
-                        <button class="mobile-view-toggle mobile-only" id="viewToggleBtn" onclick="toggleMobileView()"
-                            style="margin-top: 10px; display: none;">
-                            Switch to List View
-                        </button>
-                        <!-- Show button via JS or CSS media query helper if needed, but CSS handles .mobile-only roughly above? No, distinct class needed. We will control visibility via media query inline style or existing. -->
-                        <!-- Let's fix display based on media query in style block above, forcing display block mainly on mobile -->
                         <style>
-                            @media(max-width: 767px) {
+                            /* Default hidden on desktop */
+                            #viewToggleBtn {
+                                display: none;
+                            }
+
+                            /* Show on mobile/tablet */
+                            @media(max-width: 768px) {
                                 #viewToggleBtn {
-                                    display: block !important;
+                                    display: block;
                                 }
                             }
                         </style>
+                        <button class="mobile-view-toggle mobile-only" id="viewToggleBtn" onclick="toggleMobileView()"
+                            style="margin-top: 10px;">
+                            Switch to List View
+                        </button>
                     </div>
 
                     <div class="table-container" id="bookingsTableContainer">
