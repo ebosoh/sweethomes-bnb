@@ -747,9 +747,11 @@
                 <div class="card">
                     <p>Upload new images to the homepage carousel.</p>
                     <form id="uploadForm">
-                        <input type="file" id="imageInput" accept="image/*" required>
-                        <input type="text" id="imageCaption" placeholder="Caption (Optional)">
-                        <button type="submit">Upload Image</button>
+                        <input type="file" id="imageInput" accept="image/*" multiple required>
+                        <small style="display: block; color: #666; margin-bottom: 5px;">(Hold <b>Ctrl</b> or <b>Cmd</b>
+                            to select multiple images)</small>
+                        <input type="text" id="imageCaption" placeholder="Caption (Optional) - applied to all">
+                        <button type="submit">Upload Image(s)</button>
                     </form>
                     <p id="uploadStatus" style="margin-top: 10px;"></p>
                 </div>

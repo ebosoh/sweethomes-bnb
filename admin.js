@@ -412,51 +412,98 @@ async function handleImageUpload(e) {
     const captionInput = document.getElementById('imageCaption');
     const status = document.getElementById('uploadStatus');
 
-    if (fileInput.files.length === 0) return;
-
-    const file = fileInput.files[0];
-    const reader = new FileReader();
+    if (fileInput.files.length === 0) {
+        alert('Please select at least one file.');
+        return;
+    }
 
     showLoading(true);
-    status.innerText = 'Uploading... Please wait.';
+    let successCount = 0;
+    let failCount = 0;
+    const files = Array.from(fileInput.files); // Convert FileList to Array
+    const totalFiles = files.length;
+    const captionBase = captionInput.value;
 
-    reader.onload = async function () {
-        const base64Data = reader.result.split(',')[1]; // Remove "data:image/jpeg;base64," prefix
+    status.innerText = `Starting upload for ${totalFiles} file(s)...`;
+    status.style.color = 'blue';
+
+    for (let i = 0; i < totalFiles; i++) {
+        const file = files[i];
+        status.innerText = `Uploading ${i + 1} of ${totalFiles}: ${file.name}...`;
 
         try {
-            const response = await fetch(BACKEND_URL, {
-                method: 'POST',
-                body: JSON.stringify({
-                    action: 'uploadImage',
-                    token: currentUserToken,
-                    fileData: base64Data,
-                    fileName: file.name,
-                    mimeType: file.type,
-                    caption: captionInput.value
-                })
+            await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+
+                reader.onload = async function () {
+                    try {
+                        const result = reader.result;
+                        if (!result) {
+                            throw new Error('File read failed (empty result)');
+                        }
+                        const base64Data = result.split(',')[1];
+
+                        const response = await fetch(BACKEND_URL, {
+                            method: 'POST',
+                            body: JSON.stringify({
+                                action: 'uploadImage',
+                                token: currentUserToken,
+                                fileData: base64Data,
+                                fileName: file.name,
+                                mimeType: file.type,
+                                caption: captionBase
+                            })
+                        });
+
+                        const data = await response.json();
+                        if (data.status === 'success') {
+                            successCount++;
+                        } else {
+                            failCount++;
+                            console.error(`Upload failed for ${file.name}: ${data.message}`);
+                        }
+                    } catch (err) {
+                        failCount++;
+                        console.error(`Error uploading ${file.name}:`, err);
+                    } finally {
+                        resolve(); // Always resolve to continue loop
+                    }
+                };
+
+                reader.onerror = () => {
+                    failCount++;
+                    console.error(`File reading error for ${file.name}`);
+                    resolve();
+                };
+
+                reader.readAsDataURL(file);
             });
 
-            const data = await response.json();
-
-            if (data.status === 'success') {
-                status.innerText = 'Upload Successful! Refresh website to see changes.';
-                status.style.color = 'green';
-                fileInput.value = '';
-                captionInput.value = '';
-            } else {
-                status.innerText = 'Error: ' + data.message;
-                status.style.color = 'red';
+            // Small delay to be polite to the backend script
+            if (i < totalFiles - 1) {
+                await new Promise(r => setTimeout(r, 500));
             }
-        } catch (err) {
-            console.error(err);
-            status.innerText = 'Upload failed due to connection error.';
-            status.style.color = 'red';
-        } finally {
-            showLoading(false);
-        }
-    };
 
-    reader.readAsDataURL(file);
+        } catch (loopErr) {
+            console.error('Loop error:', loopErr);
+            failCount++;
+        }
+    }
+
+    showLoading(false);
+
+    // Final report
+    if (failCount === 0) {
+        status.innerText = `Success! All ${totalFiles} images uploaded. Refreshing...`;
+        status.style.color = 'green';
+        fileInput.value = '';
+        captionInput.value = '';
+        setTimeout(fetchCurrentPrices, 1000); // Give backend a moment to propagate
+    } else {
+        status.innerText = `Done. Success: ${successCount}, Failed: ${failCount}. Check console for details.`;
+        status.style.color = 'orange';
+        fetchCurrentPrices();
+    }
 }
 
 function renderGallery(images) {
