@@ -472,9 +472,14 @@ function renderGallery(images) {
         const item = document.createElement('div');
         item.className = 'gallery-item';
 
-        // Use a placeholder if url is broken/missing
+        // Helper: Ensure Drive URLs use export=view for <img> src
+        let src = img.url;
+        if (src.includes('drive.google.com') && src.includes('export=download')) {
+            src = src.replace('export=download', 'export=view');
+        }
+
         item.innerHTML = `
-            <img src="${img.url}" alt="Carousel Image" onerror="this.src='https://via.placeholder.com/150?text=Error'">
+            <img src="${src}" alt="Carousel Image" onerror="this.src='https://via.placeholder.com/150?text=Error'">
             <p title="${img.caption}">${img.caption || 'No Caption'}</p>
             <button class="gallery-btn-delete" onclick="deleteImage('${img.url}')">Delete</button>
         `;
