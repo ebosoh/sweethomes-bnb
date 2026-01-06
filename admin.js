@@ -463,6 +463,12 @@ function renderGallery(images) {
     const grid = document.getElementById('galleryGrid');
     grid.innerHTML = '';
 
+    // Reset selection state
+    document.getElementById('deleteSelectedBtn').disabled = true;
+    document.getElementById('deleteSelectedBtn').style.opacity = '0.5';
+    document.getElementById('deleteSelectedBtn').style.cursor = 'not-allowed';
+    document.getElementById('deleteSelectedBtn').innerText = 'Delete Selected (0)';
+
     if (!images || images.length === 0) {
         grid.innerHTML = '<p>No images uploaded.</p>';
         return;
@@ -471,6 +477,8 @@ function renderGallery(images) {
     images.forEach(img => {
         const item = document.createElement('div');
         item.className = 'gallery-item';
+        // Add relative positioning for checkbox placement
+        item.style.position = 'relative';
 
         // Helper: Ensure Drive URLs use reliable public thumbnail link
         let src = img.url;
@@ -488,6 +496,9 @@ function renderGallery(images) {
         }
 
         item.innerHTML = `
+            <div style="position: absolute; top: 10px; left: 10px; z-index: 10;">
+                <input type="checkbox" class="gallery-checkbox" value="${img.url}" onchange="handleSelectionChange()" style="width: 20px; height: 20px; cursor: pointer;">
+            </div>
             <img src="${src}" alt="Carousel Image" onerror="this.src='https://via.placeholder.com/150?text=Error'">
             <p title="${img.caption}">${img.caption || 'No Caption'}</p>
             <button class="gallery-btn-delete" onclick="deleteImage('${img.url}')">Delete</button>
@@ -496,8 +507,71 @@ function renderGallery(images) {
     });
 }
 
+function handleSelectionChange() {
+    const checkboxes = document.querySelectorAll('.gallery-checkbox:checked');
+    const btn = document.getElementById('deleteSelectedBtn');
+
+    const count = checkboxes.length;
+    btn.innerText = `Delete Selected (${count})`;
+
+    if (count > 0) {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+    } else {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        btn.style.cursor = 'not-allowed';
+    }
+}
+
+async function deleteSelectedImages() {
+    const checkboxes = document.querySelectorAll('.gallery-checkbox:checked');
+    const count = checkboxes.length;
+
+    if (count === 0) return;
+
+    if (!confirm(`Are you sure you want to delete ${count} image(s)? This cannot be undone.`)) return;
+
+    showLoading(true);
+    let successCount = 0;
+
+    try {
+        // Process sequentially to be safe with backend rate limits, or parallel if robust
+        // Serial is safer for Apps Script
+        for (const box of checkboxes) {
+            const url = box.value;
+            try {
+                const response = await fetch(BACKEND_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: 'deleteImage',
+                        token: currentUserToken,
+                        url: url
+                    })
+                });
+                const data = await response.json();
+                if (data.status === 'success') {
+                    successCount++;
+                }
+            } catch (e) {
+                console.error('Failed to delete image:', url, e);
+            }
+        }
+
+        alert(`Deleted ${successCount} of ${count} images.`);
+        fetchCurrentPrices(); // Refresh gallery
+
+    } catch (err) {
+        console.error(err);
+        alert('Batch delete process encountered errors.');
+    } finally {
+        showLoading(false);
+    }
+}
+
 async function deleteImage(url) {
-    if (!confirm('Are you sure you want to remove this image from the website?')) return;
+    if (!confirm('Are you sure you want to remove this image?')) return;
 
     showLoading(true);
     try {

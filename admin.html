@@ -756,7 +756,13 @@
 
                 <!-- Gallery Grid -->
                 <div class="card" style="margin-top: 20px;">
-                    <h3>Current Images</h3>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3>Current Images</h3>
+                        <button id="deleteSelectedBtn" onclick="deleteSelectedImages()"
+                            style="width: auto; background: var(--danger); padding: 8px 15px; font-size: 14px; opacity: 0.5; cursor: not-allowed;"
+                            disabled>Delete Selected (0)</button>
+                    </div>
                     <div id="galleryGrid" class="gallery-grid">
                         <!-- Loaded via JS -->
                         <p>Loading images...</p>
