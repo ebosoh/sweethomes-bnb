@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Event Listeners
     document.getElementById('loginForm').addEventListener('submit', handleLogin);
     document.getElementById('uploadForm').addEventListener('submit', handleImageUpload);
+    document.getElementById('editBookingForm').addEventListener('submit', handleEditBookingSubmit);
 });
 
 // ============================================
@@ -138,7 +139,8 @@ async function fetchBookings() {
     if (!currentUserToken) return;
 
     const tableBody = document.querySelector('#bookingsTable tbody');
-    tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center;">Loading data...</td></tr>';
+    // Adjust colspan to 13 to account for the new Actions column
+    tableBody.innerHTML = '<tr><td colspan="13" style="text-align:center;">Loading data...</td></tr>';
 
     try {
         // GET request requires query params if using doGet
@@ -149,11 +151,11 @@ async function fetchBookings() {
         if (data.status === 'success') {
             renderBookings(data.bookings);
         } else {
-            tableBody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:red;">Error: ${data.message}</td></tr>`;
+            tableBody.innerHTML = `<tr><td colspan="13" style="text-align:center; color:red;">Error: ${data.message}</td></tr>`;
         }
     } catch (err) {
         console.error(err);
-        tableBody.innerHTML = `<tr><td colspan="8" style="text-align:center; color:red;">Connection Failed</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="13" style="text-align:center; color:red;">Connection Failed</td></tr>`;
     }
 }
 
@@ -162,7 +164,7 @@ function renderBookings(bookings) {
     tableBody.innerHTML = '';
 
     if (bookings.length === 0) {
-        tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center;">No bookings found.</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="13" style="text-align:center;">No bookings found.</td></tr>';
         return;
     }
 
@@ -172,6 +174,9 @@ function renderBookings(bookings) {
 
     bookings.forEach(b => {
         const row = document.createElement('tr');
+        // Encode booking object for safe passing to function
+        const bookingData = encodeURIComponent(JSON.stringify(b));
+
         row.innerHTML = `
             <td>${new Date(b.Timestamp).toLocaleDateString()}</td>
             <td>${b.Name}</td>
@@ -185,9 +190,115 @@ function renderBookings(bookings) {
             <td>${b['ID/Passport'] || '-'}</td>
             <td>${b['Car Plate'] || '-'}</td>
             <td><span style="padding: 4px 8px; border-radius: 4px; background: #e6f4ea; color: #1e7e34;">${b.Status}</span></td>
+            <td>
+                <button onclick="openEditModal('${bookingData}')" style="background: var(--primary); padding: 5px 10px; font-size: 12px; width: auto; margin-right: 5px;">Edit</button>
+                <button onclick="deleteBooking('${b.ID}')" style="background: var(--danger); padding: 5px 10px; font-size: 12px; width: auto;">Delete</button>
+            </td>
         `;
         tableBody.appendChild(row);
     });
+}
+
+function openEditModal(bookingStr) {
+    const booking = JSON.parse(decodeURIComponent(bookingStr));
+
+    document.getElementById('editBookingId').value = booking.ID;
+    document.getElementById('editName').value = booking.Name;
+    document.getElementById('editPhone').value = booking.Phone;
+    document.getElementById('editRoom').value = booking.Room;
+
+    // Format dates for input type="date" (YYYY-MM-DD)
+    // Assuming backend sends YYYY-MM-DD or standard ISO
+    // The sheet seems to store YYYY-MM-DD based on Code.js so we can set directly or parse
+    const formatDate = (dateStr) => {
+        if (!dateStr) return '';
+        const d = new Date(dateStr);
+        if (isNaN(d.getTime())) return dateStr; // Fallback if already string format
+        return d.toISOString().split('T')[0];
+    };
+
+    document.getElementById('editArrival').value = formatDate(booking.Arrival);
+    document.getElementById('editDeparture').value = formatDate(booking.Departure);
+    document.getElementById('editStatus').value = booking.Status;
+
+    document.getElementById('editBookingModal').style.display = 'flex';
+}
+
+function closeEditModal() {
+    document.getElementById('editBookingModal').style.display = 'none';
+}
+
+async function handleEditBookingSubmit(e) {
+    e.preventDefault();
+
+    const id = document.getElementById('editBookingId').value;
+    const name = document.getElementById('editName').value;
+    const phone = document.getElementById('editPhone').value;
+    const room = document.getElementById('editRoom').value;
+    const arrival = document.getElementById('editArrival').value;
+    const departure = document.getElementById('editDeparture').value;
+    const status = document.getElementById('editStatus').value;
+
+    showLoading(true);
+    try {
+        const response = await fetch(BACKEND_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                action: 'editBooking',
+                token: currentUserToken,
+                bookingId: id,
+                name: name,
+                phone: phone,
+                room: room,
+                arrival: arrival,
+                departure: departure,
+                status: status
+            })
+        });
+
+        const data = await response.json();
+        if (data.status === 'success') {
+            alert('Booking updated!');
+            closeEditModal();
+            fetchBookings(); // Refresh table
+        } else {
+            alert('Error: ' + data.message);
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Connection Failed');
+    } finally {
+        showLoading(false);
+    }
+}
+
+async function deleteBooking(id) {
+    if (!confirm('Are you sure you want to PERMANENTLY delete this booking?')) return;
+
+    showLoading(true);
+    try {
+        const response = await fetch(BACKEND_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                action: 'deleteBooking',
+                token: currentUserToken,
+                bookingId: id
+            })
+        });
+
+        const data = await response.json();
+        if (data.status === 'success') {
+            alert('Booking deleted!');
+            fetchBookings(); // Refresh table
+        } else {
+            alert('Error: ' + data.message);
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Connection Failed');
+    } finally {
+        showLoading(false);
+    }
 }
 
 // ============================================

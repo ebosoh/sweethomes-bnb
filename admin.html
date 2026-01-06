@@ -399,6 +399,56 @@
         </div>
     </div>
 
+    </div>
+
+    <!-- Edit Booking Modal -->
+    <div id="editBookingModal" class="loading-overlay" style="display: none;">
+        <div class="card" style="width: 90%; max-width: 500px; position: relative;">
+            <button onclick="closeEditModal()"
+                style="position: absolute; right: 10px; top: 10px; background: none; color: #333; width: auto; font-size: 20px;">&times;</button>
+            <h3 style="margin-top: 0;">Edit Booking</h3>
+            <form id="editBookingForm">
+                <input type="hidden" id="editBookingId">
+
+                <label>Guest Name</label>
+                <input type="text" id="editName" required>
+
+                <label>Phone</label>
+                <input type="text" id="editPhone" required>
+
+                <label>Room Type</label>
+                <select id="editRoom"
+                    style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 4px; border: 1px solid #ddd;">
+                    <option value="1 Bedroom">1 Bedroom</option>
+                    <option value="2 Bedroom">2 Bedroom</option>
+                    <option value="3 Bedroom">3 Bedroom</option>
+                </select>
+
+                <div style="display: flex; gap: 10px;">
+                    <div style="flex: 1;">
+                        <label>Arrival</label>
+                        <input type="date" id="editArrival" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Departure</label>
+                        <input type="date" id="editDeparture" required>
+                    </div>
+                </div>
+
+                <label>Status</label>
+                <select id="editStatus"
+                    style="width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 4px; border: 1px solid #ddd;">
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Completed">Completed</option>
+                </select>
+
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
     <!-- Dashboard -->
     <div id="dashboard">
         <button class="mobile-toggle" onclick="toggleSidebar()">☰ Menu</button>
@@ -438,6 +488,7 @@
                                 <th>ID/Passport</th>
                                 <th>Car Plate</th>
                                 <th>Status</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
