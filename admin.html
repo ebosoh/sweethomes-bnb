@@ -347,11 +347,78 @@
                 display: none;
             }
 
-            td:last-child button {
-                flex: 1;
-                margin: 0;
-                padding: 12px;
-                font-size: 14px;
+            /* View Toggle Button (Mobile Only) */
+            .mobile-view-toggle {
+                display: block;
+                margin-bottom: 15px;
+                padding: 10px 15px;
+                background: #f1f3f4;
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                width: 100%;
+                cursor: pointer;
+            }
+
+            /* --- Mobile List View Overrides --- */
+            .mobile-list-view table,
+            .mobile-list-view thead,
+            .mobile-list-view tbody,
+            .mobile-list-view th,
+            .mobile-list-view td,
+            .mobile-list-view tr {
+                display: table-cell;
+                /* Revert to valid table display for cells */
+            }
+
+            .mobile-list-view table {
+                display: table;
+                width: 100%;
+            }
+
+            .mobile-list-view thead {
+                display: table-header-group;
+            }
+
+            .mobile-list-view tbody {
+                display: table-row-group;
+            }
+
+            .mobile-list-view tr {
+                display: table-row;
+                margin-bottom: 0;
+                box-shadow: none;
+                border: none;
+            }
+
+            .mobile-list-view th,
+            .mobile-list-view td {
+                display: table-cell;
+            }
+
+            .mobile-list-view thead tr {
+                position: static;
+            }
+
+            .mobile-list-view td {
+                padding: 12px 15px;
+                text-align: left;
+                padding-left: 12px;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .mobile-list-view td::before {
+                display: none;
+            }
+
+            .mobile-list-view td:last-child {
+                display: table-cell;
+                margin-top: 0;
+            }
+
+            /* Enable scrolling for list view container on mobile */
+            .table-container.mobile-list-view {
+                overflow-x: auto;
+                display: block;
             }
         }
 
@@ -544,33 +611,61 @@
                         Report</button>
                 </div>
 
-                <div class="card" style="overflow-x: auto;">
-                    <table id="bookingsTable">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Guest Name</th>
-                                <th>Phone</th>
-                                <th>Room Type</th>
-                                <th>Arrival</th>
-                                <th>Departure</th>
-                                <th>Total (KES)</th>
-                                <th>Nationality</th>
-                                <th>Address</th>
-                                <th>ID/Passport</th>
-                                <th>Car Plate</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Data populated via JS -->
-                            <tr>
-                                <td colspan="8" style="text-align: center;">Loading...</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <div class="card" style="padding: 0;">
+
+                    <div
+                        style="padding: 15px; border-bottom: 1px solid #eee; background: #fff; border-radius: 8px 8px 0 0;">
+                        <div style="display: flex; gap: 10px; align-items: center; width: 100%;">
+                            <input type="text" id="searchInput" placeholder="Search bookings..."
+                                style="flex: 1 1 auto; min-width: 0; padding: 10px; border: 1px solid #ddd; border-radius: 4px; height: 40px; box-sizing: border-box;">
+                            <button onclick="filterBookings()"
+                                style="flex: 0 0 auto; width: auto; background: var(--primary); color: white; border: none; padding: 0 20px; border-radius: 4px; cursor: pointer; white-space: nowrap; height: 40px; box-sizing: border-box; line-height: 40px; display: flex; align-items: center;">Go</button>
+                            <div id="searchLoader" class="spinner"></div>
+                        </div>
+
+                        <button class="mobile-view-toggle mobile-only" id="viewToggleBtn" onclick="toggleMobileView()"
+                            style="margin-top: 10px; display: none;">
+                            Switch to List View
+                        </button>
+                        <!-- Show button via JS or CSS media query helper if needed, but CSS handles .mobile-only roughly above? No, distinct class needed. We will control visibility via media query inline style or existing. -->
+                        <!-- Let's fix display based on media query in style block above, forcing display block mainly on mobile -->
+                        <style>
+                            @media(max-width: 767px) {
+                                #viewToggleBtn {
+                                    display: block !important;
+                                }
+                            }
+                        </style>
+                    </div>
+
+                    <div class="table-container" id="bookingsTableContainer">
+                        <table id="bookingsTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Date</th>
+                                    <th>Guest Name</th>
+                                    <th>Phone</th>
+                                    <th>Room Type</th>
+                                    <th>Arrival</th>
+                                    <th>Departure</th>
+                                    <th>Total (KES)</th>
+                                    <th>Nationality</th>
+                                    <th>Address</th>
+                                    <th>ID/Passport</th>
+                                    <th>Car Plate</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Data populated via JS -->
+                                <tr>
+                                    <td colspan="8" style="text-align: center;">Loading...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
             </section>
 
             <!-- Calendars Section -->
