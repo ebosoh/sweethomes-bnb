@@ -281,6 +281,78 @@
             .card {
                 padding: 15px;
             }
+
+            /* Responsive Table (Card View) */
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            tr {
+                border: 1px solid #ddd;
+                margin-bottom: 20px;
+                border-radius: 8px;
+                background: #fff;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                padding: 10px;
+            }
+
+            td {
+                /* Behave like a "row" */
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 45%;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                text-align: right;
+                min-height: 40px;
+            }
+
+            td:before {
+                /* Now like a table header */
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                width: 40%;
+                padding-right: 10px;
+                white-space: nowrap;
+                text-align: left;
+                font-weight: bold;
+                content: attr(data-label);
+                color: var(--primary);
+            }
+
+            td:last-child {
+                border-bottom: 0;
+                padding-left: 0;
+                padding-right: 0;
+                display: flex;
+                justify-content: stretch;
+                gap: 10px;
+                margin-top: 10px;
+            }
+
+            td:last-child:before {
+                display: none;
+            }
+
+            td:last-child button {
+                flex: 1;
+                margin: 0;
+                padding: 12px;
+                font-size: 14px;
+            }
         }
 
         /* Calendar Tabs */

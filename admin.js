@@ -178,19 +178,19 @@ function renderBookings(bookings) {
         const bookingData = encodeURIComponent(JSON.stringify(b));
 
         row.innerHTML = `
-            <td>${new Date(b.Timestamp).toLocaleDateString()}</td>
-            <td>${b.Name}</td>
-            <td>${b.Phone}</td>
-            <td>${b.Room}</td>
-            <td>${b.Arrival} ${b['Arrival Time'] || ''}</td>
-            <td>${b.Departure} ${b['Departure Time'] || ''}</td>
-            <td>KES ${Number(b.Total).toLocaleString()}</td>
-            <td>${b.Nationality || '-'}</td>
-            <td>${b.Address || '-'}</td>
-            <td>${b['ID/Passport'] || '-'}</td>
-            <td>${b['Car Plate'] || '-'}</td>
-            <td><span style="padding: 4px 8px; border-radius: 4px; background: #e6f4ea; color: #1e7e34;">${b.Status}</span></td>
-            <td>
+            <td data-label="Date">${new Date(b.Timestamp).toLocaleDateString()}</td>
+            <td data-label="Guest Name">${b.Name}</td>
+            <td data-label="Phone">${b.Phone}</td>
+            <td data-label="Room Type">${b.Room}</td>
+            <td data-label="Arrival">${b.Arrival} ${b['Arrival Time'] || ''}</td>
+            <td data-label="Departure">${b.Departure} ${b['Departure Time'] || ''}</td>
+            <td data-label="Total (KES)">KES ${Number(b.Total).toLocaleString()}</td>
+            <td data-label="Nationality">${b.Nationality || '-'}</td>
+            <td data-label="Address">${b.Address || '-'}</td>
+            <td data-label="ID/Passport">${b['ID/Passport'] || '-'}</td>
+            <td data-label="Car Plate">${b['Car Plate'] || '-'}</td>
+            <td data-label="Status"><span style="padding: 4px 8px; border-radius: 4px; background: #e6f4ea; color: #1e7e34;">${b.Status}</span></td>
+            <td data-label="Actions">
                 <button onclick="openEditModal('${bookingData}')" style="background: var(--primary); padding: 5px 10px; font-size: 12px; width: auto; margin-right: 5px;">Edit</button>
                 <button onclick="deleteBooking('${b.ID}')" style="background: var(--danger); padding: 5px 10px; font-size: 12px; width: auto;">Delete</button>
             </td>
