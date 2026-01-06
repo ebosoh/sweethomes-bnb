@@ -1297,6 +1297,16 @@ a:hover {
     color: var(--text-light);
     padding: var(--space-3xl) 0 var(--space-xl);
     margin-top: var(--space-3xl);
+    position: relative;
+    z-index: 5;
+}
+
+/* Add padding on mobile to prevent Sticky CTA from covering footer content */
+@media (max-width: 767px) {
+    .footer {
+        padding-bottom: 100px;
+        /* Space for Sticky CTA */
+    }
 }
 
 .footer-content {
@@ -1527,35 +1537,49 @@ a:hover {
 
 /* Updated Scroll Indicator Positioning */
 .carousel-container {
-    position: relative; /* Anchor for absolute indicators */
+    position: relative;
+    /* Anchor for absolute indicators */
 }
 
 .scroll-indicator {
     bottom: auto;
     top: 50%;
     transform: translateY(-50%);
-    animation: none; /* Reset simpler animation */
+    animation: none;
+    /* Reset simpler animation */
 }
 
 .scroll-indicator.left {
-    left: -60px; /* Push outside carousel */
+    left: -60px;
+    /* Push outside carousel */
 }
 
 .scroll-indicator.right {
-    right: -60px; /* Push outside carousel */
+    right: -60px;
+    /* Push outside carousel */
 }
 
 .scroll-indicator::after {
-    transform: rotate(0deg); /* Text is vertical-rl, arrow char 2193  usually points down. If sideways, we rotate 90deg */
+    transform: rotate(0deg);
+    /* Text is vertical-rl, arrow char 2193  usually points down. If sideways, we rotate 90deg */
     /* If browser rotates  90deg to point right, we need -90deg to point down. Let's try explicit. */
-    writing-mode: horizontal-tb; /* Reset arrow to horizontal flow so rotation is predictable */
-    transform: rotate(0deg); /* Down is 0deg for standard block flow */
+    writing-mode: horizontal-tb;
+    /* Reset arrow to horizontal flow so rotation is predictable */
+    transform: rotate(0deg);
+    /* Down is 0deg for standard block flow */
 }
 
 /* New bounce animation for side indicators */
 @keyframes side-bounce {
-    0%, 100% { transform: translateY(-50%); }
-    50% { transform: translateY(-40%); }
+
+    0%,
+    100% {
+        transform: translateY(-50%);
+    }
+
+    50% {
+        transform: translateY(-40%);
+    }
 }
 
 .scroll-indicator {
@@ -1563,9 +1587,21 @@ a:hover {
 }
 
 @media (max-width: 1350px) {
+
     /* On smaller screens where outside indicators might clip, move them inside */
-    .scroll-indicator.left { left: 10px; z-index: 20; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
-    .scroll-indicator.right { right: 10px; z-index: 20; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+    .scroll-indicator.left {
+        left: 10px;
+        z-index: 20;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .scroll-indicator.right {
+        right: 10px;
+        z-index: 20;
+        color: #fff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
 }
 
 
@@ -1578,7 +1614,8 @@ a:hover {
 .country-select {
     width: 120px;
     flex-shrink: 0;
-    padding-right: var(--space-xs); /* Adjustment for dropdown arrow */
+    padding-right: var(--space-xs);
+    /* Adjustment for dropdown arrow */
 }
 
 
@@ -1602,4 +1639,3 @@ a:hover {
     color: var(--primary);
     transform: translateY(-3px);
 }
-
