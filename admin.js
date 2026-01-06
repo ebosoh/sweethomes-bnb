@@ -357,10 +357,15 @@ async function fetchCurrentPrices() {
         const response = await fetch(`${BACKEND_URL}?action=getData`);
         const data = await response.json();
 
-        if (data.status === 'success' && data.prices) {
-            if (document.getElementById('price1Bedroom')) document.getElementById('price1Bedroom').value = data.prices['1 Bedroom'] || '';
-            if (document.getElementById('price2Bedroom')) document.getElementById('price2Bedroom').value = data.prices['2 Bedroom'] || '';
-            if (document.getElementById('price3Bedroom')) document.getElementById('price3Bedroom').value = data.prices['3 Bedroom'] || '';
+        if (data.status === 'success') {
+            if (data.prices) {
+                if (document.getElementById('price1Bedroom')) document.getElementById('price1Bedroom').value = data.prices['1 Bedroom'] || '';
+                if (document.getElementById('price2Bedroom')) document.getElementById('price2Bedroom').value = data.prices['2 Bedroom'] || '';
+                if (document.getElementById('price3Bedroom')) document.getElementById('price3Bedroom').value = data.prices['3 Bedroom'] || '';
+            }
+            if (data.images) {
+                renderGallery(data.images);
+            }
         }
     } catch (err) {
         console.error('Failed to load prices', err);
@@ -452,6 +457,59 @@ async function handleImageUpload(e) {
     };
 
     reader.readAsDataURL(file);
+}
+
+function renderGallery(images) {
+    const grid = document.getElementById('galleryGrid');
+    grid.innerHTML = '';
+
+    if (!images || images.length === 0) {
+        grid.innerHTML = '<p>No images uploaded.</p>';
+        return;
+    }
+
+    images.forEach(img => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+
+        // Use a placeholder if url is broken/missing
+        item.innerHTML = `
+            <img src="${img.url}" alt="Carousel Image" onerror="this.src='https://via.placeholder.com/150?text=Error'">
+            <p title="${img.caption}">${img.caption || 'No Caption'}</p>
+            <button class="gallery-btn-delete" onclick="deleteImage('${img.url}')">Delete</button>
+        `;
+        grid.appendChild(item);
+    });
+}
+
+async function deleteImage(url) {
+    if (!confirm('Are you sure you want to remove this image from the website?')) return;
+
+    showLoading(true);
+    try {
+        const response = await fetch(BACKEND_URL, {
+            method: 'POST',
+            body: JSON.stringify({
+                action: 'deleteImage',
+                token: currentUserToken,
+                url: url
+            })
+        });
+
+        const data = await response.json();
+        if (data.status === 'success') {
+            alert('Image deleted!');
+            // Refresh data
+            fetchCurrentPrices();
+        } else {
+            alert('Error: ' + data.message);
+        }
+    } catch (err) {
+        console.error(err);
+        alert('Connection error');
+    } finally {
+        showLoading(false);
+    }
 }
 
 // ============================================
