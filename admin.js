@@ -472,10 +472,19 @@ function renderGallery(images) {
         const item = document.createElement('div');
         item.className = 'gallery-item';
 
-        // Helper: Ensure Drive URLs use export=view for <img> src
+        // Helper: Ensure Drive URLs use reliable public thumbnail link
         let src = img.url;
-        if (src.includes('drive.google.com') && src.includes('export=download')) {
-            src = src.replace('export=download', 'export=view');
+        if (src.includes('drive.google.com') && src.includes('id=')) {
+            const idMatch = src.match(/id=([^&]+)/);
+            if (idMatch && idMatch[1]) {
+                src = `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
+            }
+        } else if (src.includes('drive.google.com') && src.includes('/file/d/')) {
+            // Handle /file/d/ID format
+            const idMatch = src.match(/\/file\/d\/([^/]+)/);
+            if (idMatch && idMatch[1]) {
+                src = `https://lh3.googleusercontent.com/d/${idMatch[1]}`;
+            }
         }
 
         item.innerHTML = `
