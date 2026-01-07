@@ -2,549 +2,604 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechBrain AI | The Future, Forged in Africa</title>
+    <meta name="description"
+        content="Pioneering Intelligent Solutions from the Heart of Africa. TechBrain AI specializes in Predictive Analytics, Computer Vision, and NLP.">
 
-  <!-- SEO Meta Tags -->
-  <title>sweethomes-bnb - Premium Accommodation Booking | Comfort & Convenience</title>
-  <meta name="description"
-    content="Book your premium stay at sweethomes-bnb. Modern, comfortable accommodation with free WiFi, parking, 24/7 security, and Netflix. 1, 2, and 3 bedroom options available.">
-  <meta name="keywords"
-    content="accommodation booking, premium stays, vacation rental, Kenya accommodation, sweethomes-bnb">
-  <meta name="author" content="sweethomes-bnb">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-  <!-- Open Graph / Social Media Meta Tags -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="sweethomes-bnb - Premium Accommodation Booking">
-  <meta property="og:description"
-    content="Book your premium stay with comfort and convenience. Modern amenities, secure location, and excellent service.">
-  <meta property="og:url" content="https://yourusername.github.io/sweethomes-bnb">
-  <meta property="og:image" content="https://yourusername.github.io/sweethomes-bnb/og-image.jpg">
-
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="sweethomes-bnb - Premium Accommodation Booking">
-  <meta name="twitter:description" content="Book your premium stay with comfort and convenience.">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png">
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet">
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons (using CDN for simplicity) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
 
-  <!-- Premium Promo Banner -->
-  <div id="promoBanner" class="promo-banner">
-    <span id="promoText" class="promo-text animate-pulse-gold">Get 10% Discount for any stays more than 5 nights (weekly
-      rate)</span>
-  </div>
-
-  <!-- Hero Section -->
-  <section id="hero" class="hero-section">
-    <div class="container">
-      <div class="hero-content">
-        <div class="logo-container">
-          <img src="seethomes-logo.jpg" alt="sweethomes-bnb Logo" class="hero-logo animate-glow" id="heroLogo">
-        </div>
-        <h1 class="hero-title animate-fade-in">Welcome to sweethomes-bnb Apartments in Nakuru City</h1>
-        <p class="hero-subtitle animate-fade-in">Premium Stays. Comfort. Convenience.</p>
-        <a href="#booking" class="btn btn-primary btn-lg animate-fade-in">Book Your Stay</a>
-      </div>
-
-      <!-- Hero Image Slider / Carousel ... -->
-      <!-- ... (Keep existing structure, just targeting the H1 change effectively by context if needed, but simple replace works better) -->
-
-      <!-- Wait, I can't simple replace a huge block if I only want to change H1 and Payment. I will do 2 chunks. -->
-    </div>
-
-    </div>
-  </section>
-
-  <!-- Property Carousel -->
-  <section id="gallery" class="section">
-    <div class="container">
-      <h2 class="section-title">Explore Our Property</h2>
-      <div class="carousel-container">
-        <!-- Premium Scroll Indicators (Side of Carousel) -->
-        <div class="scroll-indicator left"
-          onclick="document.getElementById('rooms').scrollIntoView({behavior: 'smooth'})">Scroll</div>
-        <div class="scroll-indicator right"
-          onclick="document.getElementById('rooms').scrollIntoView({behavior: 'smooth'})">Scroll</div>
-
-        <div class="carousel" id="propertyCarousel">
-          <div class="carousel-track" id="carouselTrack">
-            <div class="carousel-slide">
-              <img src="property-1.jpg" alt="Property View 1" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-2.jpg" alt="Property View 2" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-3.jpg" alt="Property View 3" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-4.jpg" alt="Property View 4" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-5.jpg" alt="Property View 5" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-6.jpg" alt="Property View 6" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-7.jpg" alt="Property View 7" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-8.jpg" alt="Property View 8" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-9.jpg" alt="Property View 9" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-10.jpg" alt="Property View 10" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-11.jpg" alt="Property View 11" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-12.jpg" alt="Property View 12" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-13.jpg" alt="Property View 13" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-14.jpg" alt="Property View 14" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-15.jpg" alt="Property View 15" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-16.jpg" alt="Property View 16" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-17.jpg" alt="Property View 17" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-18.jpg" alt="Property View 18" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-19.jpeg" alt="Property View 19" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-20.jpeg" alt="Property View 20" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-21.jpeg" alt="Property View 21" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-22.jpeg" alt="Property View 22" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-23.jpeg" alt="Property View 23" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-24.jpeg" alt="Property View 24" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-25.jpeg" alt="Property View 25" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-26.jpeg" alt="Property View 26" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-27.jpeg" alt="Property View 27" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-28.jpeg" alt="Property View 28" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-29.jpeg" alt="Property View 29" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-30.jpeg" alt="Property View 30" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-31.jpeg" alt="Property View 31" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-32.jpeg" alt="Property View 32" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-33.jpeg" alt="Property View 33" class="carousel-image">
-            </div>
-            <div class="carousel-slide">
-              <img src="property-34.jpeg" alt="Property View 34" class="carousel-image">
-            </div>
-          </div>
-          <button class="carousel-btn carousel-btn-prev" id="carouselPrev" aria-label="Previous slide">
-            <span>‹</span>
-          </button>
-          <button class="carousel-btn carousel-btn-next" id="carouselNext" aria-label="Next slide">
-            <span>›</span>
-          </button>
-        </div>
-        <div class="carousel-dots" id="carouselDots"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Room Types & Pricing -->
-  <section id="rooms" class="section bg-white">
-    <div class="container">
-      <h2 class="section-title">Room Types & Pricing</h2>
-      <p class="text-center text-secondary mb-xl">Choose the perfect accommodation for your stay</p>
-
-      <div class="grid grid-3 room-cards">
-        <!-- 1 Bedroom -->
-        <article class="card room-card">
-          <div class="room-header">
-            <h3 class="card-title">1 Bedroom</h3>
-            <span class="badge badge-accent">Max 2 Guests</span>
-          </div>
-          <div class="room-price">
-            <span class="price-amount" id="priceDisplay1Bedroom">KES 3,500</span>
-            <span class="price-period">/ night</span>
-          </div>
-          <p class="card-text">Perfect for couples or solo travelers seeking comfort and privacy.</p>
-          <ul class="room-features">
-            <li>Queen-size bed</li>
-            <li>Private bathroom</li>
-            <li>Work desk</li>
-            <li>All amenities included</li>
-          </ul>
-          <a href="https://maps.google.com/?q=-0.273546,36.059166" target="_blank" class="btn btn-secondary btn-block"
-            style="margin-bottom: 10px;">View Room Location</a>
-          <a href="#booking" class="btn btn-outline btn-block">Book Now</a>
-        </article>
-
-        <!-- 2 Bedroom -->
-        <article class="card room-card featured">
-          <div class="featured-badge">Most Popular</div>
-          <div class="room-header">
-            <h3 class="card-title">2 Bedroom</h3>
-            <span class="badge badge-accent">Max 4 Guests</span>
-          </div>
-          <div class="room-price">
-            <span class="price-amount" id="priceDisplay2Bedroom">KES 4,500</span>
-            <span class="price-period">/ night</span>
-          </div>
-          <p class="card-text">Ideal for small families or groups seeking spacious accommodation.</p>
-          <ul class="room-features">
-            <li>2 comfortable bedrooms</li>
-            <li>Shared living space</li>
-            <li>Full kitchen access</li>
-            <li>All amenities included</li>
-          </ul>
-          <a href="https://maps.google.com/?q=-0.273546,36.059166" target="_blank" class="btn btn-secondary btn-block"
-            style="margin-bottom: 10px;">View Room Location</a>
-          <a href="#booking" class="btn btn-primary btn-block">Book Now</a>
-        </article>
-
-        <!-- 3 Bedroom -->
-        <article class="card room-card">
-          <div class="room-header">
-            <h3 class="card-title">3 Bedroom</h3>
-            <span class="badge badge-accent">Max 6 Guests</span>
-          </div>
-          <div class="room-price">
-            <span class="price-amount" id="priceDisplay3Bedroom">KES 6,500</span>
-            <span class="price-period">/ night</span>
-          </div>
-          <p class="card-text">Perfect for larger families or groups wanting maximum space and comfort.</p>
-          <ul class="room-features">
-            <li>3 spacious bedrooms</li>
-            <li>Large living area</li>
-            <li>Full kitchen & dining</li>
-            <li>All amenities included</li>
-          </ul>
-          <a href="https://maps.google.com/?q=-0.296965,36.082996" target="_blank" class="btn btn-secondary btn-block"
-            style="margin-bottom: 10px;">View Room Location</a>
-          <a href="#booking" class="btn btn-outline btn-block">Book Now</a>
-        </article>
-      </div>
-
-      <div class="payment-notice">
-        <p><strong>Payment Terms:</strong> Full Payment on arrival. M-Pesa only.</p>
-        <p class="text-sm">Guests exceeding allowed capacity will incur extra charges.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Amenities -->
-  <section id="amenities" class="section">
-    <div class="container">
-      <h2 class="section-title">Premium Amenities</h2>
-      <p class="text-center text-secondary mb-xl">Everything you need for a comfortable stay</p>
-
-      <div class="grid grid-4 amenities-grid">
-        <div class="amenity-item animate-fade-in">
-          <div class="amenity-icon">🚿</div>
-          <h4 class="amenity-title">Hot Shower</h4>
-        </div>
-        <div class="amenity-item animate-fade-in">
-          <div class="amenity-icon">🍳</div>
-          <h4 class="amenity-title">Equipped Kitchen</h4>
-        </div>
-        <div class="amenity-item animate-fade-in">
-          <div class="amenity-icon">📶</div>
-          <h4 class="amenity-title">Free WiFi</h4>
-        </div>
-        <div class="amenity-item animate-fade-in">
-          <div class="amenity-icon">🚗</div>
-          <h4 class="amenity-title">Free Parking</h4>
-        </div>
-        <div class="amenity-item animate-fade-in">
-          <div class="amenity-icon">🛡️</div>
-          <h4 class="amenity-title">24/7 Security</h4>
-        </div>
-        <div class="amenity-item animate-fade-in">
-          <div class="amenity-icon">🏘️</div>
-          <h4 class="amenity-title">Gated Community</h4>
-        </div>
-        <div class="amenity-item animate-fade-in">
-          <div class="amenity-icon">📍</div>
-          <h4 class="amenity-title">Near Town</h4>
-        </div>
-        <div class="amenity-item animate-fade-in">
-          <div class="amenity-icon">📺</div>
-          <h4 class="amenity-title">43" Smart TV + Netflix</h4>
-        </div>
-        <div class="amenity-item animate-fade-in">
-          <div class="amenity-icon">🧺</div>
-          <h4 class="amenity-title">Washing Machines</h4>
-        </div>
-        <div class="amenity-item animate-fade-in">
-          <div class="amenity-icon">🛝</div>
-          <h4 class="amenity-title">Children Playground</h4>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Booking Form -->
-  <section id="booking" class="section bg-white">
-    <div class="container">
-      <h2 class="section-title">Book Your Stay</h2>
-      <p class="text-center text-secondary mb-xl">Fill in your details to reserve your accommodation</p>
-
-      <div class="booking-container">
-        <form id="bookingForm" class="booking-form">
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fullName" class="form-label">Full Name *</label>
-              <input type="text" id="fullName" name="fullName" class="form-input" required>
-            </div>
-            <div class="form-group">
-              <label for="nationality" class="form-label">Nationality *</label>
-              <input type="text" id="nationality" name="nationality" class="form-input" required>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <!-- Phone Number (International) -->
-            <div class="form-group">
-              <label for="phone" class="form-label">Phone Number</label>
-              <div class="phone-input-group">
-                <select id="countryCode" class="form-input country-select" aria-label="Country Code">
-                  <option value="+254" selected>🇰🇪 +254</option>
-                  <option value="+1">🇺🇸 +1</option>
-                  <option value="+44">🇬🇧 +44</option>
-                  <option value="+91">🇮🇳 +91</option>
-                  <option value="+256">🇺🇬 +256</option>
-                  <option value="+255">🇹🇿 +255</option>
-                  <option value="+971">🇦🇪 +971</option>
-                  <option value="+86">🇨🇳 +86</option>
-                  <option value="+49">🇩🇪 +49</option>
-                  <option value="+27">🇿🇦 +27</option>
-                  <option value="other">Other</option>
-                </select>
-                <input type="tel" id="mobile" class="form-input" placeholder="712 345 678" required>
-              </div>
-            </div>
-
-            <!-- Address -->
-            <div class="form-group">
-              <label for="address" class="form-label">Address / Location</label>
-              <input type="text" id="address" class="form-input" placeholder="e.g. Nairobi, Westlands" required>
-            </div>
-            <div class="form-group">
-              <label for="idPassport" class="form-label">ID / Passport Number *</label>
-              <input type="text" id="idPassport" name="idPassport" class="form-input" required>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="carPlate" class="form-label">Car Number Plate</label>
-              <input type="text" id="carPlate" name="carPlate" class="form-input" placeholder="Optional">
-            </div>
-            <div class="form-group">
-              <label for="roomType" class="form-label">Room Type *</label>
-              <select id="roomType" name="roomType" class="form-select" required>
-                <option value="" data-price="0">Select Room Type</option>
-                <option value="1 Bedroom" data-price="3500">1 Bedroom (Max 2 Guests) - KES 3,500/night</option>
-                <option value="2 Bedroom" data-price="4500">2 Bedroom (Max 4 Guests) - KES 4,500/night</option>
-                <option value="3 Bedroom" data-price="6500">3 Bedroom (Max 6 Guests) - KES 6,500/night</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row total-price-row" style="display: flex; justify-content: space-between;">
-            <div class="form-group total-price-group" style="flex: 1;">
-              <label class="form-label">Total Price ESTIMATE in KES</label>
-              <div id="totalPriceDisplay" class="total-price-display">KES 0</div>
-            </div>
-            <div class="form-group total-price-group" style="flex: 1; text-align: right;">
-              <label class="form-label">Total Price ESTIMATE in USD($)</label>
-              <div id="totalPriceDisplayUSD" class="total-price-display">USD 0.00</div>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="arrivalDate" class="form-label">Arrival Date *</label>
-              <input type="date" id="arrivalDate" name="arrivalDate" class="form-input" required>
-            </div>
-            <div class="form-group">
-              <label for="arrivalTime" class="form-label">Arrival Time *</label>
-              <input type="time" id="arrivalTime" name="arrivalTime" class="form-input" required>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="departureDate" class="form-label">Departure Date *</label>
-              <input type="date" id="departureDate" name="departureDate" class="form-input" required>
-            </div>
-            <div class="form-group">
-              <label for="departureTime" class="form-label">Departure Time *</label>
-              <input type="time" id="departureTime" name="departureTime" class="form-input" required>
-            </div>
-          </div>
-
-          <div class="booking-instructions">
-            <h4>Important Booking Information</h4>
-            <ul>
-              <li>Full payment on arrival via M-Pesa</li>
-              <li>Check-in: After 2:00 PM, Check-out: Before 10:00 AM</li>
-              <li>Prices shown are per night</li>
-              <li>Guests exceeding allowed capacity will incur extra charges</li>
-            </ul>
-          </div>
-
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary btn-lg btn-block" id="submitBooking">
-              Confirm Booking
-            </button>
-          </div>
-        </form>
-
-        <div id="bookingSuccess" class="booking-success hidden">
-          <div class="success-icon">✓</div>
-          <h3>Booking Confirmed!</h3>
-          <p>Thank you for your booking. You will receive a confirmation email shortly.</p>
-          <button class="btn btn-secondary" onclick="resetBookingForm()">Make Another Booking</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sticky Book Now Button (Mobile) -->
-  <div class="sticky-cta">
-    <a href="#booking" class="btn btn-primary btn-block">Book Now</a>
-  </div>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>sweethomes-bnb</h3>
-          <p>Premium accommodation with comfort and convenience.</p>
-        </div>
-
-        <div class="footer-section">
-          <h4>Contact</h4>
-          <p>Phone: <a href="tel:+254780898927">+254 780 898 927</a></p>
-          <p>Phone: <a href="tel:0780898927">0780 898 927</a></p>
-        </div>
-
-        <div class="footer-section">
-          <h4>Quick Links</h4>
-          <ul class="footer-links">
-            <li><a href="#rooms">Room Types</a></li>
-            <li><a href="#amenities">Amenities</a></li>
-            <li><a href="#booking">Book Now</a></li>
-            <li><a href="rules.html">Stay Rules</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h4>Follow Us</h4>
-          <div class="social-icons" id="socialIcons">
-            <a href="https://www.facebook.com/share/1C28bQvHAD/?mibextid=wwXIfr" class="social-icon" target="_blank"
-              rel="noopener noreferrer" aria-label="Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
+    <!-- Navigation -->
+    <nav class="glass-panel" id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-brain"></i> TechBrain <span class="highlight">AI</span>
             </a>
-            <a href="https://www.instagram.com/sweet_homes_nakuru?igsh=MXI3N3Qwd2d6Mnc3MQ==" class="social-icon"
-              target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
-            <a href="https://www.tiktok.com/@bnb_nakuru?_r=1&_t=ZM-92lQI0u5h6K" class="social-icon" target="_blank"
-              rel="noopener noreferrer" aria-label="TikTok">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 1 0-1 13.6 6.84 6.84 0 0 0 6.45-6.84V6.65a5 5 0 0 0 1.95 2.05l.12.04v-3.8z">
-                </path>
-              </svg>
-            </a>
-          </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#portfolio">Portfolio</a>
+                <a href="#technologies">Technologies</a>
+                <a href="#clients">Clients</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <a href="#contact" class="btn btn-primary glow-effect">Book a Demo</a>
+            <div class="hamburger">
+                <i class="fa-solid fa-bars"></i>
+            </div>
         </div>
-      </div>
+    </nav>
 
-      <div class="footer-bottom">
-        <p>&copy; 2026 sweethomes-bnb. All rights reserved. | <a href="privacy.html"
-            style="color: inherit; text-decoration: none;">Privacy</a> | <a href="terms.html"
-            style="color: inherit; text-decoration: none;">Terms of Use</a></p>
-        <p style="margin-top: 0.5rem; font-size: 0.9em; opacity: 0.8;">Designed and Powered by <a
-            href="https://www.techbrain.africa" target="_blank" rel="noopener noreferrer"
-            style="color: inherit; font-weight: 700; text-decoration: none; border-bottom: 1px dotted currentColor;">TECHBRAIN</a>
-        </p>
-      </div>
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <canvas id="particle-canvas"></canvas>
+        <div class="container hero-content">
+            <h1 class="fade-in-up">Pioneering Intelligent Solutions <br> from the <span class="gradient-text">Heart of
+                    Africa</span></h1>
+            <div class="dynamic-text-wrapper fade-in-up delay-1">
+                <span id="typewriter"></span><span class="cursor">|</span>
+            </div>
+            <div class="hero-btns fade-in-up delay-2">
+                <a href="#services" class="btn btn-outline">Explore Our AI</a>
+                <a href="#contact" class="btn btn-primary glow-effect">Book a Strategy Session</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container about-grid">
+            <div class="about-text glass-panel fade-in-left">
+                <h2>About TechBrain AI</h2>
+                <p>We are a cutting-edge artificial intelligence startup based in Kenya, dedicated to solving local and
+                    global challenges through innovation.</p>
+                <div class="mission-box">
+                    <i class="fa-solid fa-rocket"></i>
+                    <p>Our mission is to democratize advanced AI, transforming businesses with predictive power and
+                        automation.</p>
+                </div>
+            </div>
+            <div class="about-stats fade-in-right">
+                <div class="stat-item">
+                    <div class="stat-number" data-target="98">0</div>
+                    <div class="stat-symbol">%</div>
+                    <p>Problem-Solving Accuracy</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="50">0</div>
+                    <div class="stat-symbol">+</div>
+                    <p>Projects Delivered</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" data-target="100">0</div>
+                    <div class="stat-symbol">%</div>
+                    <p>Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section bg-gradient">
+        <div class="container">
+            <h2 class="section-title text-center">Our AI Arsenal</h2>
+            <div class="services-carousel">
+                <div class="services-track" id="services-track">
+
+
+                    <div class="service-card glass-panel">
+                        <div class="icon-box"><i class="fa-solid fa-language"></i></div>
+                        <h3>NLP Solutions</h3>
+                        <p>Break language barriers with advanced Natural Language Processing and chatbots.</p>
+                        <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+
+                    <!-- New Services -->
+                    <div class="service-card glass-panel">
+                        <div class="icon-box"><i class="fa-solid fa-network-wired"></i></div>
+                        <h3>AI Agent & Agentic Systems</h3>
+                        <p>Deploy autonomous agents that reason, plan, and execute complex tasks seamlessly.</p>
+                        <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card glass-panel">
+                        <div class="icon-box"><i class="fa-solid fa-calendar-check"></i></div>
+                        <h3>Booking Conversational AI</h3>
+                        <p>Automate 24/7 scheduling with intelligent voice and text agents for seamless reservations.
+                        </p>
+                        <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+
+                    <div class="service-card glass-panel">
+                        <div class="icon-box"><i class="fa-solid fa-comments"></i></div>
+                        <h3>AI Chatbots</h3>
+                        <p>Deploy intelligent conversational agents that engage customers, answer questions, and provide
+                            instant support 24/7.
+                        </p>
+                        <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+
+
+
+                    <div class="service-card glass-panel">
+                        <div class="icon-box"><i class="fa-solid fa-share-nodes"></i></div>
+                        <h3>Social Media Autopilot</h3>
+                        <p>Automate content creation and community engagement to grow your brand presence effortlessly.
+                        </p>
+                        <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card glass-panel">
+                        <div class="icon-box"><i class="fa-solid fa-laptop-code"></i></div>
+                        <h3>Business Websites</h3>
+                        <p>High-performance, futuristic websites designed to convert visitors and elevate your brand
+                            authority.</p>
+                        <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="service-card glass-panel">
+                        <div class="icon-box"><i class="fa-solid fa-layer-group"></i></div>
+                        <h3>Web Applications</h3>
+                        <p>Scalable, secure, and dynamic web applications tailored to streamline your business
+                            operations.</p>
+                        <a href="#" class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="section">
+        <div class="container">
+            <h2 class="section-title text-center">Our Portfolio</h2>
+            <p class="section-subtitle text-center">Explore our innovative web applications and client success stories
+            </p>
+
+            <!-- Tab Navigation -->
+            <div class="portfolio-tabs">
+                <button class="portfolio-tab active" data-tab="webapps">
+                    <i class="fa-solid fa-code"></i> Web Applications
+                </button>
+                <button class="portfolio-tab" data-tab="websites">
+                    <i class="fa-solid fa-globe"></i> Client Websites
+                </button>
+            </div>
+
+            <!-- Web Applications Tab Content -->
+            <div class="portfolio-content active" id="webapps-content">
+                <div class="portfolio-grid">
+                    <!-- myDOC Application Card -->
+                    <div class="portfolio-card glass-panel">
+                        <div class="portfolio-logo">
+                            <img src="mydoc_logo.png" alt="myDOC Logo">
+                        </div>
+                        <h3>myDOC</h3>
+                        <p>Comprehensive digital clinic management system for modern healthcare facilities</p>
+                        <button class="btn btn-primary glow-effect" onclick="openLoginModal('mydoc')">
+                            <i class="fa-solid fa-flask"></i> Test Application
+                        </button>
+                    </div>
+
+                    <!-- SweetStay Application Card -->
+                    <div class="portfolio-card glass-panel">
+                        <div class="portfolio-logo">
+                            <img src="sweetstay_logo.png" alt="SweetStay Logo">
+                        </div>
+                        <h3>SweetStay</h3>
+                        <p>Modern, lightweight booking management system for Airbnbs and guest houses</p>
+                        <button class="btn btn-primary glow-effect" onclick="window.openServiceModal('sweetstay')">
+                            <i class="fa-solid fa-list-check"></i> View Features
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client Websites Tab Content -->
+        <div class="portfolio-content" id="websites-content">
+            <div class="portfolio-grid client-grid">
+                <!-- TechBrain -->
+                <div class="client-card glass-panel">
+                    <div class="client-info">
+                        <h3>TechBrain</h3>
+                        <p class="client-location"><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</p>
+                    </div>
+                    <a href="https://www.techbrain.africa/" target="_blank" class="btn btn-outline">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
+                    </a>
+                </div>
+
+                <!-- Benno AI -->
+                <div class="client-card glass-panel">
+                    <div class="client-info">
+                        <h3>Benno AI</h3>
+                        <p class="client-location"><i class="fa-solid fa-location-dot"></i> Berlin, Germany</p>
+                    </div>
+                    <a href="https://benno-ai.com/" target="_blank" class="btn btn-outline">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
+                    </a>
+                </div>
+
+                <!-- EUSMS -->
+                <div class="client-card glass-panel">
+                    <div class="client-info">
+                        <h3>EUSMS</h3>
+                        <p class="client-location"><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</p>
+                    </div>
+                    <a href="https://eusms.org/" target="_blank" class="btn btn-outline">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
+                    </a>
+                </div>
+
+                <!-- Tyrrst -->
+                <div class="client-card glass-panel">
+                    <div class="client-info">
+                        <h3>Tyrrst</h3>
+                        <p class="client-location"><i class="fa-solid fa-location-dot"></i> Oslo, Norway</p>
+                    </div>
+                    <a href="https://tyrrst.com/" target="_blank" class="btn btn-outline">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
+                    </a>
+                </div>
+
+                <!-- JITADC -->
+                <div class="client-card glass-panel">
+                    <div class="client-info">
+                        <h3>JITADC</h3>
+                        <p class="client-location"><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</p>
+                    </div>
+                    <a href="https://jitadc.com/" target="_blank" class="btn btn-outline">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
+                    </a>
+                </div>
+
+                <!-- Pinnacle Dental Centre -->
+                <div class="client-card glass-panel">
+                    <div class="client-info">
+                        <h3>Pinnacle Dental Centre</h3>
+                        <p class="client-location"><i class="fa-solid fa-location-dot"></i> Nairobi, Kenya</p>
+                    </div>
+                    <a href="https://www.pinnacledentalcentre.com/" target="_blank" class="btn btn-outline">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
+                    </a>
+                </div>
+
+                <!-- Dr. Diana Dental Clinic -->
+                <div class="client-card glass-panel">
+                    <div class="client-info">
+                        <h3>Dr. Diana Dental Clinic</h3>
+                        <p class="client-location"><i class="fa-solid fa-location-dot"></i> Eldoret, Kenya</p>
+                    </div>
+                    <a href="https://drdianaandassociatesdentalclinic.co.ke/" target="_blank" class="btn btn-outline">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
+                    </a>
+                </div>
+
+                <!-- SWEET HOMES- BnB -->
+                <div class="client-card glass-panel">
+                    <div class="client-info">
+                        <h3>SWEET HOMES- BnB</h3>
+                        <p class="client-location"><i class="fa-solid fa-location-dot"></i> Nakuru, Kenya</p>
+                    </div>
+                    <a href="https://www.sweethomes-bnb.africa/" target="_blank" class="btn btn-outline">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> View Website
+                    </a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="technologies" class="section">
+        <div class="container">
+            <h2 class="section-title text-center">The Tech Brain Core</h2>
+            <div class="tech-grid">
+                <div class="tech-item glass-panel" title="TensorFlow"><i class="fa-brands fa-google"></i>
+                    <span>TensorFlow</span>
+                </div>
+                <div class="tech-item glass-panel" title="Python"><i class="fa-brands fa-python"></i>
+                    <span>Python</span>
+                </div>
+                <div class="tech-item glass-panel" title="Cloud"><i class="fa-solid fa-cloud"></i> <span>Cloud
+                        APIs</span></div>
+                <div class="tech-item glass-panel" title="Google Cloud"><i class="fa-brands fa-google"></i> <span>Google
+                        Cloud</span></div>
+                <div class="tech-item glass-panel" title="Agent Dev Kit"><i class="fa-solid fa-code-branch"></i>
+                    <span>Google ADK</span>
+                </div>
+                <div class="tech-item glass-panel" title="LLMs"><i class="fa-solid fa-brain"></i> <span>LLMs</span>
+                </div>
+            </div>
+
+            <div class="process-flow glass-panel">
+                <h3>Our Process</h3>
+                <div class="steps vertical-process">
+                    <div class="step">
+                        <div class="step-icon"><i class="fa-solid fa-database"></i></div>
+                        <p>Data Ingestion</p>
+                    </div>
+                    <div class="arrow animated-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fa-solid fa-brain"></i></div>
+                        <p>Model Training</p>
+                    </div>
+                    <div class="arrow animated-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fa-solid fa-rocket"></i></div>
+                        <p>Deployment</p>
+                    </div>
+                    <div class="arrow animated-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="step">
+                        <div class="step-icon"><i class="fa-solid fa-rotate"></i></div>
+                        <p>Continuous Learning</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="section bg-gradient">
+        <div class="container">
+            <h2 class="section-title text-center">Trusted Partners</h2>
+            <div class="carousel-container glass-panel">
+                <div class="carousel-track" id="client-track">
+                    <!-- Client 1 -->
+                    <div class="carousel-slide active">
+                        <div class="testimonial">
+                            <i class="fa-solid fa-handshake quote-icon"></i>
+                            <p>ELDORET-CBD</p>
+                            <h4><a href="https://drdianaandassociatesdentalclinic.co.ke/" target="_blank">DR. DIANA
+                                    DENTAL CLINIC</a></h4>
+                        </div>
+                    </div>
+                    <!-- Client 2 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial">
+                            <i class="fa-solid fa-handshake quote-icon"></i>
+                            <p>WESTLANDS</p>
+                            <h4><a href="https://www.pinnacledentalcentre.com/" target="_blank">PINNACLE DENTAL
+                                    CENTRE</a></h4>
+                        </div>
+                    </div>
+                    <!-- Client 3 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial">
+                            <i class="fa-solid fa-handshake quote-icon"></i>
+                            <p>KITUI TOWN</p>
+                            <h4>MAKELE DIGITAL CLINIC</h4>
+                        </div>
+                    </div>
+                    <!-- Client 4 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial">
+                            <i class="fa-solid fa-handshake quote-icon"></i>
+                            <p>NAIROBI-CBD</p>
+                            <h4><a href="https://jitadc.com/" target="_blank">JESUS IS THE ANSWER DENTAL CLINIC</a></h4>
+                        </div>
+                    </div>
+                    <!-- Client 5 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial">
+                            <i class="fa-solid fa-handshake quote-icon"></i>
+                            <p>NAIROBI- MUTHAIGA</p>
+                            <h4><a href="https://www.gerties.org/" target="_blank">GERTRUDE'S CHILDREN HOSPITAL</a></h4>
+                        </div>
+                    </div>
+                    <!-- Client 6 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial">
+                            <i class="fa-solid fa-handshake quote-icon"></i>
+                            <p>NAIROBI- WESTLANDS</p>
+                            <h4><a href="https://eusms.org/" target="_blank">EUSMS</a></h4>
+                        </div>
+                    </div>
+                    <!-- Client 7 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial">
+                            <i class="fa-solid fa-handshake quote-icon"></i>
+                            <p>NORWAY</p>
+                            <h4><a href="https://tyrrst.com/" target="_blank">TYRRST</a></h4>
+                        </div>
+                    </div>
+                    <!-- Client 8 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial">
+                            <i class="fa-solid fa-handshake quote-icon"></i>
+                            <p>GERMANY</p>
+                            <h4><a href="https://benno-ai.com/" target="_blank">GENNO AI</a></h4>
+                        </div>
+                    </div>
+                    <!-- Client 9 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial">
+                            <i class="fa-solid fa-handshake quote-icon"></i>
+                            <p>NAIROBI- KAREN</p>
+                            <h4><a href="https://cuea.edu/" target="_blank">CATHOLIC UNIVERSITY OF EASTERN AFRICA</a>
+                            </h4>
+                        </div>
+                    </div>
+                    <!-- Client 10 -->
+                    <div class="carousel-slide">
+                        <div class="testimonial">
+                            <i class="fa-solid fa-handshake quote-icon"></i>
+                            <p>NYERI</p>
+                            <h4><a href="https://www.bantuafrica.co.ke" target="_blank">BANTU AFRICA HOTEL</a></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-controls">
+                    <button id="prev-slide"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button id="next-slide"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="contact" class="section">
+        <div class="container contact-container">
+            <div class="contact-info glass-panel">
+                <h2>Unlock Your Potential</h2>
+                <p>Ready to evolve? Book a strategy session with our AI experts.</p>
+                <div class="info-item">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Nairobi, Kenya</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-envelope"></i>
+                    <span>hudson.eboso@techbrain.africa</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>254780010010</span>
+                </div>
+            </div>
+
+            <form id="booking-form" class="booking-form glass-panel">
+                <h3>Book a Demo</h3>
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required placeholder="Your Name">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" required placeholder="Your Company">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required placeholder="name@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="service">Service of Interest</label>
+                    <select id="service">
+                        <option value="analytics">Predictive Analytics</option>
+                        <option value="vision">Computer Vision</option>
+                        <option value="nlp">NLP Solutions</option>
+                        <option value="automation">AI Automation</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Preferred Date</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="4" placeholder="Tell us about your needs"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary glow-effect full-width">Submit Request</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">TechBrain AI</div>
+            <div class="social-links">
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/techbrainco/?viewAsMember=true" target="_blank"><i
+                        class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+            </div>
+            <p>&copy; 2026 TechBrain AI. All rights reserved. The Future, Forged in Africa.</p>
+        </div>
+    </footer>
+
+    <!-- Modal for Success -->
+    <div id="modal" class="modal">
+        <div class="modal-content glass-panel">
+            <span class="close-modal">&times;</span>
+            <i class="fa-solid fa-check-circle success-icon"></i>
+            <h3>Request Received!</h3>
+            <p>Our team will contact you shortly to confirm your demo.</p>
+        </div>
     </div>
-  </footer>
 
-  <!-- WhatsApp Float Button -->
-  <a href="https://wa.me/254780898927" class="whatsapp-float" target="_blank" rel="noopener"
-    aria-label="Chat on WhatsApp">
-    <span class="whatsapp-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor"
-        color="#ffffff">
-        <path
-          d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.592 2.654-.696c1.029.575 1.936.88 2.806.88 3.183 0 5.769-2.586 5.769-5.766.001-3.182-2.585-5.764-5.769-5.764zm.92 8.169c-.318.159-.159.27-.478.431-.482.253-1.077.307-2.149-.12-1.07-.426-1.956-1.371-2.486-2.096-.134.19-.661.85-.062 1.487.675.675 1.579 1.517 3.394 1.517.962 0 1.639-.345 2.155-.835.48-.456.634-1.229.479-1.936-.089.412-.478.697-.733.824-.12.06-.521.26-.12.728zm2.469-8.791C13.805 4.364 11.969 4 10.134 4 6.75 4 4.002 6.748 4 10.131c0 1.082.28 2.106.772 3.012L4 16.5l3.473-.912c.96.485 2.046.75 3.197.75 4.908 0 8.893-3.991 8.893-8.895 0-2.457-.954-4.767-2.695-6.508-1.741-1.742-4.053-2.693-6.51-2.693-5.068 0-9.192 4.124-9.192 9.192 0 1.977.635 3.821 1.705 5.341L3 19l4.167-1.107c1.472.935 3.204 1.488 5.068 1.488 5.068 0 9.192-4.124 9.192-9.192-.001-5.069-4.127-9.193-9.195-9.193z" />
-      </svg>
-    </span>
-  </a>
+    <!-- Service Detail Modal -->
+    <div id="service-modal" class="service-modal">
+        <div class="glass-panel modal-content">
+            <span class="close-modal-service">&times;</span>
+            <div class="modal-body-content">
+                <div class="modal-image-container">
+                    <img id="modal-service-image" src="" alt="Service Illustration">
+                </div>
+                <div class="modal-text-content">
+                    <h2 id="modal-service-title">Service Title</h2>
+                    <div id="modal-service-description">
+                        <!-- Dynamic Content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-  <!-- JavaScript -->
-  <script src="script.js"></script>
+    <!-- Login Instructions Modal -->
+    <div id="login-modal" class="service-modal">
+        <div class="glass-panel modal-content login-modal-content">
+            <span class="close-login-modal">&times;</span>
+            <div class="modal-body-content">
+                <div class="login-modal-header">
+                    <i class="fa-solid fa-key"></i>
+                    <h2 id="login-app-name">Application Login</h2>
+                </div>
+                <div class="login-instructions">
+                    <p id="login-instructions-text"></p>
+
+                    <div class="credentials-box">
+                        <h3><i class="fa-solid fa-user-lock"></i> Test Credentials</h3>
+                        <div class="credential-item">
+                            <label><i class="fa-solid fa-envelope"></i> Email:</label>
+                            <div class="credential-value">
+                                <code id="login-email"></code>
+                                <button class="copy-btn" onclick="copyToClipboard('login-email')" title="Copy email">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="credential-item">
+                            <label><i class="fa-solid fa-lock"></i> Password:</label>
+                            <div class="credential-value">
+                                <code id="login-password"></code>
+                                <button class="copy-btn" onclick="copyToClipboard('login-password')"
+                                    title="Copy password">
+                                    <i class="fa-solid fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a id="open-app-btn" href="" target="_blank" class="btn btn-primary glow-effect full-width">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Application
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+    <!-- ElevenLabs Convai Widget -->
+    <elevenlabs-convai agent-id="agent_0001kdmrkvy6e748hwwyxk057jwe"></elevenlabs-convai>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 
 </html>
