@@ -122,6 +122,15 @@ function updateCarousel(images) {
         };
 
         slide.appendChild(image);
+
+        // Add Caption if exists
+        if (img.caption && img.caption.trim() !== "") {
+            const captionEl = document.createElement('div');
+            captionEl.className = 'carousel-caption';
+            captionEl.innerText = img.caption;
+            slide.appendChild(captionEl);
+        }
+
         track.appendChild(slide);
     });
 
