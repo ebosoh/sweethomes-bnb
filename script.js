@@ -361,25 +361,69 @@ class BookingForm {
         document.getElementById('arrivalDate')?.addEventListener('change', () => this.calculateTotal());
         document.getElementById('departureDate')?.addEventListener('change', () => this.calculateTotal());
 
-        // Enforce Time Rules
-        document.getElementById('arrivalTime')?.addEventListener('change', (e) => {
-            const time = e.target.value;
-            if (!time) return;
-            // 2:00 PM is 14:00, 11:00 PM is 23:00
-            if (time < '14:00' || time > '23:00') {
-                alert('Sorry Check-in time not allowed. Refer to Important Booking Information below.');
-                e.target.value = ''; // Reset
+        // Populate Time Selects
+        this.populateTimeSelects();
+    }
+
+    populateTimeSelects() {
+        const arrivalSelect = document.getElementById('arrivalTime');
+        const departureSelect = document.getElementById('departureTime');
+
+        if (!arrivalSelect || !departureSelect) return;
+
+        // Helper to generate time slots
+        const times = [];
+        for (let h = 0; h < 24; h++) {
+            for (let m = 0; m < 60; m += 30) {
+                const hourStr = h.toString().padStart(2, '0');
+                const minStr = m.toString().padStart(2, '0');
+                const timeValue = `${hourStr}:${minStr}`;
+
+                // Format for display (e.g. 2:00 PM)
+                const date = new Date();
+                date.setHours(h, m);
+                const displayTime = date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+
+                times.push({ value: timeValue, display: displayTime, hour: h, minute: m });
             }
+        }
+
+        // Arrival: 14:00 (2 PM) to 23:00 (11 PM) allowed
+        times.forEach(t => {
+            const option = document.createElement('option');
+            option.value = t.value;
+
+            // Allow 14:00 to 23:00 (inclusive of 23:00? usually check-in stops AT 11pm)
+            // Let's say valid is 14:00 <= t <= 23:00
+            // logic: if hour < 14 or hour > 23...
+            // Actually requirement: "Arrival Time must be between 2:00PM and 11:00PM"
+            // So 14:00 is OK, 23:00 is OK. 23:30 is NOT.
+
+            if (t.hour < 14 || (t.hour === 23 && t.minute > 0) || t.hour > 23) {
+                option.disabled = true;
+                option.innerText = `${t.display} (Not Allowed)`;
+                option.style.color = '#ccc'; // Gray out
+            } else {
+                option.innerText = t.display;
+            }
+            arrivalSelect.appendChild(option);
         });
 
-        document.getElementById('departureTime')?.addEventListener('change', (e) => {
-            const time = e.target.value;
-            if (!time) return;
-            // 10:00 AM is 10:00
-            if (time > '10:00') {
-                alert('Sorry Check-out time not allowed. Refer to Important Booking Information below.');
-                e.target.value = ''; // Reset
+        // Departure: Before 10:00 AM
+        // Valid: 00:00 to 10:00
+        times.forEach(t => {
+            const option = document.createElement('option');
+            option.value = t.value;
+
+            // Allow up to 10:00
+            if (t.hour > 10 || (t.hour === 10 && t.minute > 0)) {
+                option.disabled = true;
+                option.innerText = `${t.display} (Not Allowed)`;
+                option.style.color = '#ccc'; // Gray out
+            } else {
+                option.innerText = t.display;
             }
+            departureSelect.appendChild(option);
         });
     }
 

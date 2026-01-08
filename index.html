@@ -417,8 +417,9 @@
             </div>
             <div class="form-group">
               <label for="arrivalTime" class="form-label">Arrival Time *</label>
-              <input type="time" id="arrivalTime" name="arrivalTime" class="form-input" min="14:00" max="23:00"
-                required>
+              <select id="arrivalTime" name="arrivalTime" class="form-input" required>
+                <option value="" disabled selected>Select Arrival Time</option>
+              </select>
             </div>
           </div>
 
@@ -429,7 +430,9 @@
             </div>
             <div class="form-group">
               <label for="departureTime" class="form-label">Departure Time *</label>
-              <input type="time" id="departureTime" name="departureTime" class="form-input" max="10:00" required>
+              <select id="departureTime" name="departureTime" class="form-input" required>
+                <option value="" disabled selected>Select Departure Time</option>
+              </select>
             </div>
           </div>
 
