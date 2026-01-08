@@ -360,6 +360,27 @@ class BookingForm {
         document.getElementById('roomType')?.addEventListener('change', () => this.calculateTotal());
         document.getElementById('arrivalDate')?.addEventListener('change', () => this.calculateTotal());
         document.getElementById('departureDate')?.addEventListener('change', () => this.calculateTotal());
+
+        // Enforce Time Rules
+        document.getElementById('arrivalTime')?.addEventListener('change', (e) => {
+            const time = e.target.value;
+            if (!time) return;
+            // 2:00 PM is 14:00, 11:00 PM is 23:00
+            if (time < '14:00' || time > '23:00') {
+                alert('Sorry Check-in time not allowed. Refer to Important Booking Information below.');
+                e.target.value = ''; // Reset
+            }
+        });
+
+        document.getElementById('departureTime')?.addEventListener('change', (e) => {
+            const time = e.target.value;
+            if (!time) return;
+            // 10:00 AM is 10:00
+            if (time > '10:00') {
+                alert('Sorry Check-out time not allowed. Refer to Important Booking Information below.');
+                e.target.value = ''; // Reset
+            }
+        });
     }
 
     async handleSubmit(e) {
