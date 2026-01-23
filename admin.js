@@ -373,7 +373,7 @@ async function fetchCurrentPrices() {
 }
 
 async function updatePrice(roomType) {
-    const inputId = `price${roomType}`;
+    const inputId = `price${roomType.replace(/ /g, '')}`;
     const priceVal = document.getElementById(inputId).value;
 
     if (!priceVal) return alert('Please enter a price');
