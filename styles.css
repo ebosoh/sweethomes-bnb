@@ -678,8 +678,12 @@ a:hover {
 }
 
 .hero-logo {
-    max-width: 140px;
-    height: auto;
+    width: 288px;
+    /* 192px * 1.5 */
+    height: 192px;
+    /* Original height at 100% scale */
+    object-fit: fill;
+    /* Stretches the image to fill the new width */
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
     transform-origin: top center;
     /* Swing from the top */
@@ -1422,22 +1426,25 @@ a:hover {
     right: var(--space-lg);
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+    background-color: #25D366;
+    /* Official WhatsApp Green */
     border-radius: var(--radius-full);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: var(--shadow-xl);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(37, 211, 102, 0.6);
+    /* Depth + Glow */
     z-index: var(--z-sticky);
     transition: all var(--transition-base);
-    animation: pulse 2s infinite;
+    animation: neon-pulse 2s infinite;
 }
 
 .whatsapp-float:hover {
     transform: scale(1.1);
+    background-color: #20BA56;
+    /* Slightly darker on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3), 0 0 30px rgba(37, 211, 102, 0.8);
     animation: none;
-    /* Pause pulse on hover */
-    box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
 }
 
 .whatsapp-icon {
@@ -1447,19 +1454,16 @@ a:hover {
     line-height: 0;
 }
 
-@keyframes pulse {
+@keyframes neon-pulse {
     0% {
-        transform: scale(1);
         box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
     }
 
     70% {
-        transform: scale(1.05);
         box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
     }
 
     100% {
-        transform: scale(1);
         box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
     }
 }
